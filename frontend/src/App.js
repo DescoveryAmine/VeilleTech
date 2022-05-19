@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import routes from "./routes/routes";
 import Loading from "./components/Loading/Loading";
 import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
-
+//ok
 function App() {
   return (
     <Suspense fallback={<Loading />}>
