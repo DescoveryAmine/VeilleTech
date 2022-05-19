@@ -1,5 +1,3 @@
-const xml2js = require('xml2js');
-const axios = require ('axios');
 const mongoose = require('mongoose');
 const rssmodel1 = require('./rss/clientmodel1');
 const rssmodel2 = require('./rss/clientmodel2');
