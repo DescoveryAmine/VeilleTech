@@ -26,7 +26,6 @@ const HeaderOne = () => {
         <AuthModal
           show={showAuth}
           onCancel={closeAuthHandler}
-          header="{props.state}"
           contentClass="place-item__modal-content"
           footerClass="place-item__modal-actions"
           footer={<Button onClick={closeAuthHandler}>CLOSE</Button>}
