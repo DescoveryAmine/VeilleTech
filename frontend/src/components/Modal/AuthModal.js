@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import Card from '../../components/Card/Card';
@@ -11,14 +11,18 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE
 } from '../../utils/validators';
+import { useHttpClient } from '../../hooks/http-hook';
+import { AuthContext } from '../../context/auth-context';
 import { useForm } from '../../hooks/form-hook';
 import './Auth.css';
 import Backdrop from './Backdrop';
 
 
 const ModalOverlay = props => {
+
+  const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -60,63 +64,46 @@ const ModalOverlay = props => {
 
   const authSubmitHandler = async event => {
     event.preventDefault();
-    
-    setIsLoading(true);
 
     if (isLoginMode) {
       try {
-        const response = await fetch('http://localhost:5000/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/users/login',
+          'POST',
+          JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          })
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setIsLoading(false);
-        //auth.login();
-      } catch (err) {
-        setIsLoading(false);
-        //setError(err.message || 'Something went wrong, please try again.');
-      }
+          }),
+          {
+            'Content-Type': 'application/json'
+          }
+        );
+        auth.login(responseData.user.id);
+      } catch (err) {}
     } else {
       try {
-        const response = await fetch('http://localhost:5000/api/users/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/users/signup',
+          'POST',
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          })
-        });
+          }),
+          {
+            'Content-Type': 'application/json'
+          }
+        );
 
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setIsLoading(false);
-        //auth.login();
-      } catch (err) {
-        setIsLoading(false);
-        //setError(err.message || 'Something went wrong, please try again.');
-      }
+        auth.login(responseData.user.id);
+      } catch (err) {}
     }
   };
 
   const content = (
     <div className={`modal__main ${props.className}`} style={props.style}>
       <header className={`modal__header ${props.headerClass}`}>
-        <h2>{props.header}</h2>
+        <h2>{isLoginMode ? 'LOGIN HERE' : 'SIGNUP HERE'}</h2>
       </header>
       <Card className="authentication">
         {isLoading && <LoadingSpinner/>}
