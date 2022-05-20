@@ -1,16 +1,52 @@
-import { Suspense } from "react";
+import { Suspense, useState, useCallback  } from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import routes from "./routes/routes";
+import PostAuthroutes from "./routes/PostAuthRoutes";
+import AfterAuthroutes from "./routes/AfterAuthRoutes";
 import Loading from "./components/Loading/Loading";
+import { AuthContext } from './context/auth-context';
 import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
-
+//ok
 function App() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <Router>
-        <Switch>
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false);
+
+  const login = useCallback(uid => {
+    setIsLoggedIn(true);
+    setUserId(uid);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setUserId(null);
+  }, []);
+
+  let routes;
+
+  if (isLoggedIn) {
+    routes = (
+      <Switch>
+      {
+        AfterAuthroutes?.map((route, index) => {
+          return (
+            <ThemeRoute
+              key={index}
+              name={route.name}
+              exact={route.exact}
+              path={route.path}
+              theme={route.theme}
+              component={route.component}
+            >{route.component}</ThemeRoute>
+          )
+        })
+      }
+    </Switch>
+       );
+      } else {
+        routes = (
+          <Switch>
           {
-            routes?.map((route, index) => {
+            PostAuthroutes?.map((route, index) => {
               return (
                 <ThemeRoute
                   key={index}
@@ -24,8 +60,25 @@ function App() {
             })
           }
         </Switch>
+        );
+      }
+
+  return (
+
+    <AuthContext.Provider
+    value={{
+      isLoggedIn: isLoggedIn,
+      userId: userId,
+      login: login,
+      logout: logout
+    }}
+  >
+    <Suspense fallback={<Loading />}>
+      <Router>
+       {routes}
       </Router>
     </Suspense>
+    </AuthContext.Provider>
   );
 }
 

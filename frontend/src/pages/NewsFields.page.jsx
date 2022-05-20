@@ -64,7 +64,7 @@ const News = () => {
     return (
         <>
             {/* Page Banner section  */}
-            <BannerTwo pageTitle="News Feeds" title="News" />
+            <BannerTwo pageTitle="News Fields" title="News" />
 
             {/* Content  */}
             <section className="news-page">
