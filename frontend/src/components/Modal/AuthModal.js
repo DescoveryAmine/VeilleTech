@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 import Card from '../../components/Card/Card';
 import Input from '../../components/Form/Input';
 import Button from '../../components/Form/Button';
+import { toast, ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../../components/Loading/Loading';
 import {
   VALIDATOR_EMAIL,
@@ -23,7 +24,6 @@ const ModalOverlay = props => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
@@ -37,7 +37,6 @@ const ModalOverlay = props => {
     },
     false
   );
-
   const switchModeHandler = () => {
     if (!isLoginMode) {
       setFormData(
@@ -96,6 +95,7 @@ const ModalOverlay = props => {
         );
 
         auth.login(responseData.user.id);
+        setIsLoginMode(true);
       } catch (err) {}
     }
   };
@@ -105,6 +105,8 @@ const ModalOverlay = props => {
       <header className={`modal__header ${props.headerClass}`}>
         <h2>{isLoginMode ? 'LOGIN HERE' : 'SIGNUP HERE'}</h2>
       </header>
+      <React.Fragment>
+      {/* <ErrorModal error={error} onClear={clearError} /> */}
       <Card className="authentication">
         {isLoading && <LoadingSpinner/>}
         <Button inverse onClick={switchModeHandler}>
@@ -138,8 +140,8 @@ const ModalOverlay = props => {
             id="password"
             type="password"
             label="Password"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a valid password, at least 5 characters."
+            validators={[VALIDATOR_MINLENGTH(6)]}
+            errorText="Please enter a valid password, at least 6 characters."
             onInput={inputHandler}
           />
           </div>
@@ -148,6 +150,10 @@ const ModalOverlay = props => {
           </Button>
         </form>
       </Card>
+      <div>
+       {error&&(<p>{error}</p>)}
+      </div>
+      </React.Fragment>
     </div>
   );
   return ReactDOM.createPortal(content, document.getElementById('modal'));
