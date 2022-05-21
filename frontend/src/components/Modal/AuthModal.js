@@ -5,7 +5,6 @@ import { CSSTransition } from 'react-transition-group';
 import Card from '../../components/Card/Card';
 import Input from '../../components/Form/Input';
 import Button from '../../components/Form/Button';
-import { toast, ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../../components/Loading/Loading';
 import {
   VALIDATOR_EMAIL,
@@ -22,7 +21,7 @@ import Backdrop from './Backdrop';
 const ModalOverlay = props => {
 
   const auth = useContext(AuthContext);
-  const [isLoginMode, setIsLoginMode] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -77,7 +76,7 @@ const ModalOverlay = props => {
             'Content-Type': 'application/json'
           }
         );
-        auth.login(responseData.user.id);
+        auth.login(responseData.user.id,responseData.user.name);
       } catch (err) {}
     } else {
       try {
@@ -94,7 +93,7 @@ const ModalOverlay = props => {
           }
         );
 
-        auth.login(responseData.user.id);
+        auth.login(responseData.user.id,responseData.user.name);
         setIsLoginMode(true);
       } catch (err) {}
     }
@@ -160,11 +159,12 @@ const ModalOverlay = props => {
 };
 
 const AuthModal = props => {
+  const auth = useContext(AuthContext);
   return (
     <React.Fragment>
-      {props.show && <Backdrop onClick={props.onCancel} />}
+      {!auth.isLoggedIn? props.show?<Backdrop onClick={props.onCancel}/>:props.show:props.onCancel}
       <CSSTransition
-        in={props.show}
+        in={props.show?!auth.isLoggedIn:props.show}
         mountOnEnter
         unmountOnExit
         timeout={200}

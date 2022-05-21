@@ -1,98 +1,20 @@
-import { useState } from 'react';
+import { AuthContext } from '../../context/auth-context';
+import { useState, useContext, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
-
-const menus = [
-    {
-        id: 1,
-        linkText: 'Home',
-        child: true,
-        icon: 'angle-down',
-        submenu: [
-            {
-                id: 7,
-                link: '/news/news-fields',
-                linkText: 'News Fields'
-            },
-            {
-                id: 8,
-                link: '/news/news-articles',
-                linkText: 'News Details'
-            },
-  
-        ]
-    },
-    {
-        id: 2,
-        linkText: 'E-services',
-        child: true,
-        icon: 'angle-down',
-        submenu: [
-            {
-                id: 9,
-                link: '/service',
-                linkText: 'Veille Interractive'
-            },
-            {
-                id: 10,
-                link: '/single-service',
-                linkText: 'NewsLetters'
-            },
-        ]
-    },
-    {
-        id: 3,
-        linkText: 'E-bib',
-        child: true,
-        icon: 'angle-down',
-        submenu: [
-            {
-                id: 11,
-                link: '/portfolio',
-                linkText: 'Evennement Scientifique',
-            },
-            {
-                id: 12,
-                link: '/single-portfolio',
-                linkText: 'Copération & Appel d\'offre',
-            },
-            {
-                id: 13,
-                link: '/Magazines',
-                linkText: 'Magazines de l\'actualités',
-            },
-        ]
-    },
-    {
-        id: 4,
-        linkText: 'Assets',
-        child: true,
-        icon: 'angle-down',
-        submenu: [
-            {
-                id: 14,
-                link: '/assets/humains',
-                linkText: 'Humains'
-            },
-            {
-                id: 15,
-                link: '/assets/materials',
-                linkText: 'Materials'
-            },
-        ]
-    },
-    {
-        id: 5,
-        linkText: 'About',
-        link: '/about'
-    },
-    {
-        id: 6,
-        linkText: 'Contact',
-        link: '/contact'
-    },
-];
+import PostLogmenus from './PostLogMenu';
+const afterLogmenus = require ('./AfterLogMenu');
 
 const MainMenu = () => {
+    
+    
+    const auth = useContext(AuthContext);
+    let Menus;
+    const afLogmenus = afterLogmenus.AfterLogmenus(auth.userName);
+
+    if   (auth.isLoggedIn) {
+          Menus = afLogmenus}
+    else {Menus = PostLogmenus}
+
     const [showMobileSubmenu, setShowMobileSubmenu] = useState(0);
     const handleShowHideOnMobileMenu = (id) => {
         if (showMobileSubmenu === 0) {
@@ -106,7 +28,7 @@ const MainMenu = () => {
     return (
         <ul className="navbar-nav">
 
-            {menus.length > 0 ? menus.map((item, i) => (
+            {Menus.length > 0 ? Menus.map((item, i) => (
                 <li key={i}
                     onClick={() => handleShowHideOnMobileMenu(item?.id)}
                     className={`${item.child ? 'dropdown' : ''} nav-item`}>
@@ -114,7 +36,7 @@ const MainMenu = () => {
                         className="menu-dropdown nav-link"
                         data-toggle="dropdown">{item.linkText}
                     </NavLink>
-                        : <NavLink to={item.link} className="nav-link"
+                        : <NavLink to={item.link} className={`${i===6?"Profile-nav-link" : "nav-link"}`}
                             data-toggle="dropdown" aria-expanded="true">{item.linkText}
 
                         </NavLink>}

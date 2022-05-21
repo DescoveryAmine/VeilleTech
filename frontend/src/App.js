@@ -1,19 +1,24 @@
 import { Suspense, useState, useCallback  } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch} from "react-router-dom";
 import PostAuthroutes from "./routes/PostAuthRoutes";
 import AfterAuthroutes from "./routes/AfterAuthRoutes";
 import Loading from "./components/Loading/Loading";
 import { AuthContext } from './context/auth-context';
 import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 //ok
+
+
+
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
-  const login = useCallback(uid => {
+  const login = useCallback((uid,name) => {
     setIsLoggedIn(true);
     setUserId(uid);
+    setUserName(name);
   }, []);
 
   const logout = useCallback(() => {
@@ -69,13 +74,14 @@ function App() {
     value={{
       isLoggedIn: isLoggedIn,
       userId: userId,
+      userName : userName,
       login: login,
       logout: logout
     }}
   >
     <Suspense fallback={<Loading />}>
       <Router>
-       {routes}
+      {routes}
       </Router>
     </Suspense>
     </AuthContext.Provider>

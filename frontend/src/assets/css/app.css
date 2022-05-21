@@ -1,5 +1,6 @@
 /*
- Theme Name: Quomodo Business
+ Theme 
+ ame: Quomodo Business
  Theme URI: 
  Author: Mosharof
  Author URI: 
@@ -83,6 +84,19 @@
     padding: 51px 0 49px;
     position: relative;
 }
+
+.Profile-nav-link{
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #14212b;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-left: 150px;
+    padding: 51px 0 49px;
+    position: relative;
+}
+
 .navbar-expand-lg .navbar-nav li:hover > .nav-link{
     color: #ff4a17;
 }
@@ -227,7 +241,6 @@
     background: #ff4a17;
     font-size: 16px;
     line-height: .8;
-    display: inline-block;
     color: #ffffff;
     font-weight: 700;
     padding: 21px 35px;

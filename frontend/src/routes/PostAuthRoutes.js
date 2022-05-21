@@ -7,7 +7,7 @@ const About = lazy(() => import('../pages/About.page'));
 const Contact = lazy(() => import('../pages/Contact.page'));
 const NotFound = lazy(() => import('../pages/Page404.page'));
 
-const routes = [
+const PostAuthroutes = [
     {
         name: 'Home',
         path: '/',
@@ -57,4 +57,4 @@ const routes = [
     }
 ];
 
-export default routes;
+export default PostAuthroutes;

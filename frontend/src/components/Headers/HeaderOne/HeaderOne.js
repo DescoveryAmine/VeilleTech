@@ -1,13 +1,15 @@
-import React, {useState } from 'react';
+import React, {useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../Form/Button';
 import logo from '../../../assets/images/logo.png';
 import MainMenu from '../../MainMenus/MainMenu';
 import Search from '../../Search/Search';
 import AuthModal from '../../Modal/AuthModal';
+import { AuthContext } from '../../../context/auth-context';
 import './HeaderOne.css';
 
 const HeaderOne = () => {
+
+    const auth = useContext(AuthContext);
 
     const [showAuth, setShowAuth] = useState(false);
 
@@ -28,7 +30,7 @@ const HeaderOne = () => {
           onCancel={closeAuthHandler}
           contentClass="place-item__modal-content"
           footerClass="place-item__modal-actions"
-          footer={<Button onClick={closeAuthHandler}>CLOSE</Button>}
+          
         >
         </AuthModal>
         <header className="header-01">
@@ -63,7 +65,7 @@ const HeaderOne = () => {
 
                             {/* <!-- Appointment Btn --> */}
                             {/* <Link to="/auth" className="appoint-btn">Inscrire<i className="fa fa-long-arrow-right"></i></Link> */}
-                            <div className="appoint-btn" onClick={openAuthHandler}>
+                            <div style={{ display: !auth.isLoggedIn ? "inline-block" : "none" }} className="appoint-btn" onClick={openAuthHandler}>
                              Inscrire
                              <i className="fa fa-long-arrow-right"></i>
                             </div>

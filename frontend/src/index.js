@@ -11,7 +11,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import "slick-carousel/slick/slick.css";
 
 ReactDOM.render(
-  <App />,
+  <App/>,
   document.getElementById('root')
 );
 

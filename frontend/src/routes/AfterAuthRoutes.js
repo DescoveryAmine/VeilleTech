@@ -9,9 +9,11 @@ const NewsFields = lazy(() => import('../pages/NewsFields.page'));
 const NewsArticles = lazy(() => import('../pages/NewsArticles.page'));
 const About = lazy(() => import('../pages/About.page'));
 const Contact = lazy(() => import('../pages/Contact.page'));
+const Current = lazy(() => import('../pages/Current.page'));
+const Logout = lazy(() => import('../pages/Logout.page'));
 const NotFound = lazy(() => import('../pages/Page404.page'));
 
-const routes = [
+const AfterAuthroutes = [
     {
         name: 'Home',
         path: '/',
@@ -85,6 +87,22 @@ const routes = [
         theme: "theme-1"
     },
     {
+        name: 'Home',
+        path: '/user/current',
+        exact: true,
+        component: Current,
+        authentication: false,
+        theme: "theme-1"
+    },
+    {
+        name: 'Logout',
+        path: '/user/logout',
+        exact: true,
+        component: Logout,
+        authentication: false,
+        theme: "theme-1"
+    },
+    {
         name: 'NotFound',
         path: '/*',
         exact: false,
@@ -93,4 +111,4 @@ const routes = [
     }
 ];
 
-export default routes;
+export default AfterAuthroutes;
