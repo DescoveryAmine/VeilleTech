@@ -1,15 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const rssmodel1 = require('./rss/clientmodel1');
+const rssmodel2 = require('./rss/clientmodel2');
+const URLS = require('./config/urls');
 
 const newsRoutes = require('./routes/news-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
+const InfoCollection = require('./models/informatique');
 
 const app = express();
 
 // DB Config
 const db = require('./config/keys').mongoURI;
+const {  infourls, elctrourls, mecanurls} = URLS;
+
 
 app.use(bodyParser.json());
 
@@ -41,11 +47,18 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(db)
+  .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true})
   .then(() => {
-    app.listen(5000);
-    console.log("server running on 5000");
+    infourls.forEach(element =>{
+      Object.keys(element).forEach(key => {
+        if(key==='Link')
+        {rssmodel2.createArticles(element[key],InfoCollection)}// key - value
+    })
+  });
+  app.listen(5000);
+  console.log("server running on 5000");
   })
   .catch(err => {
     console.log(err);
   });
+

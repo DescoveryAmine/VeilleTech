@@ -7,7 +7,7 @@ const axios = require ('axios');
 const createArticles = async (URL,schema) => {
 axios(URL).then(res => {
   const xml = res.data
-  xml2js.parseString(xml, (err, result) => {
+  xml2js.parseString(xml,{mergeAttrs : true}, (err, result) => {
     if(err) {
         throw err;
     }
@@ -20,8 +20,12 @@ axios(URL).then(res => {
     //const img=items[i]['media:content'][0]['$'].url; 
     }
     schema.insertMany(articles, function(err, res) {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return;}
+      else
       console.log("Document inserted");
+      articles =[];
 
        } )
     

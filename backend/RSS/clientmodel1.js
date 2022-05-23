@@ -7,7 +7,7 @@ const axios = require ('axios');
 const createArticles = async (URL,schema) => {
 axios(URL).then(res => {
   const xml = res.data
-  xml2js.parseString(xml, (err, result) => {
+  xml2js.parseString(xml,{mergeAttrs : true},(err, result) => {
     if(err) {
         throw err;
     }

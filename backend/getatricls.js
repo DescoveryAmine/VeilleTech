@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 const rssmodel1 = require('./rss/clientmodel1');
 const rssmodel2 = require('./rss/clientmodel2');
-const infourls = require('./config/urls').infourls;
+const infoUrls = require('./config/urls');
 // DB Config
 const db = require('./config/keys').mongoURI;
+
+const {infourls, elctrourls, mecanurls} = infoUrls;
 
 const InfoCollection = require('./models/informatique');
 
 // Connect to MongoDB
 mongoose
-  .connect(db)
+  .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true})
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
