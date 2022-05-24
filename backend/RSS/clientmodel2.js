@@ -14,18 +14,16 @@ axios(URL).then(res => {
     const json = JSON.stringify(result, null, 4);
     const docs = JSON.parse(json.toString());
     const items = docs.rss.channel[0].item;
-    const articles = [];
+    let articles = [];
     for (var i = 0; i < items.length; i++) {
       articles.push(items[i]);
     //const img=items[i]['media:content'][0]['$'].url; 
     }
     schema.insertMany(articles, function(err, res) {
-      if (err) {
-        console.log(err);
-        return;}
+      if (err) throw err;
       else
-      console.log("Document inserted");
-      articles =[];
+      {console.log("Document inserted");
+      articles =[];}
 
        } )
     

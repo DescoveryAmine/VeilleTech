@@ -17,8 +17,12 @@ const InfoSchema = new Schema({
   },
   pubDate: {
     type: Schema.Types.Mixed
-  }
+  },
+  views: {
+    type: Schema.Types.Mixed,
+    default: 0
 
+  }
   
 },{strict: false});
 

@@ -4,71 +4,12 @@ import Pagination from '../Pagination/Pagination';
 import ThemeSlider from '../Sliders/ThemeSlider/ThemeSlider';
 import Video from '../Video/Video';
 
-const style = {
-    background: '#ff4a17',
-    width: '80px',
-    height: '80px',
-    textAlign: 'center',
-    margin: 0,
-    padding: 0,
-    display: 'inline-block',
-    fontSize: '18px',
-    lineHeight: '80px',
-    opacity: 1,
-    top: '40%',
-    transition: 'all 0.4s ease',
-    cursor: 'pointer'
-}
 
-function SampleNextArrow({ classes, newStyle, onClick }) {
-    return (
-        <div
-            className={`${classes}`}
-            style={{ ...newStyle }}
-            onClick={onClick}
-        ><i className="fa fa-arrow-right" aria-hidden="true"></i></div>
-    );
-}
 
-function SamplePrevArrow({ classes, newStyle, onClick }) {
-    return (
-        <div
-            className={classes}
-            style={{ ...newStyle }}
-            onClick={onClick}
-        ><i className="fa fa-arrow-left" aria-hidden="true"></i></div>
-    );
-}
-
-const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow classes="carousel-control-next" newStyle={style} />,
-    prevArrow: <SamplePrevArrow classes="carousel-control-prev" newStyle={style} />,
-    responsive: [
-        {
-            breakpoint: 640,
-            settings: {
-                slidesToShow: 1
-            }
-        },
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 1
-            }
-        },
-
-    ]
-};
-
-const NewsContent = ({ news }) => {
-
+const NewsContent = props => {
+    
+    const {news, postsPerPage, paginated} = props;
     const [pageNumber, setPageNumber] = useState(0);
-    const postsPerPage = 5;
     const postVisited = pageNumber * postsPerPage;
     const currentPosts = news.slice(postVisited, postVisited + postsPerPage);
     const pageCount = Math.ceil(news.length / postsPerPage);
@@ -102,8 +43,6 @@ const NewsContent = ({ news }) => {
                                 </h3>
                                 <div className="news-footer">
                                     <span><i className="fa fa-eye"></i>{singleNews.views} Views</span>
-                                    <span><i className="fa fa-comments"></i>{singleNews.comments} Comments</span>
-                                    <span><i className="fa fa-calendar-alt"></i>{singleNews.date}</span>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +52,7 @@ const NewsContent = ({ news }) => {
             </div>
             {/* Pagination  */}
 
-            <Pagination pageCount={pageCount} changePage={changePage} />
+            {paginated && <Pagination pageCount={pageCount} changePage={changePage} />}
 
         </div>
     );

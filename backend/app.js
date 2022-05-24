@@ -5,7 +5,7 @@ const rssmodel1 = require('./rss/clientmodel1');
 const rssmodel2 = require('./rss/clientmodel2');
 const URLS = require('./config/urls');
 
-const newsRoutes = require('./routes/news-routes');
+const newsRoutes = require('./routes/si-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
 const InfoCollection = require('./models/informatique');
