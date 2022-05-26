@@ -11,6 +11,7 @@ const NewsContent = props => {
     const {news, postsPerPage, paginated} = props;
     const [pageNumber, setPageNumber] = useState(0);
     const postVisited = pageNumber * postsPerPage;
+    //const infoPosts = news.filter(post => post.category==='electro')
     const currentPosts = news.slice(postVisited, postVisited + postsPerPage);
     const pageCount = Math.ceil(news.length / postsPerPage);
 
@@ -25,9 +26,12 @@ const NewsContent = props => {
                 currentPosts?.map(singleNews => {
                     return (
                         <div key={singleNews?.id} className="news-item-3">
-                            <div className="news-thumb">
+                            <div className= {`${singleNews?.featureImg ? 'news-thumb' : ''}`}>
                               <>
-                                <img src={singleNews.featureImg} alt="" />
+                                    {
+                                      singleNews?.featureImg && <img src={singleNews.featureImg} alt="" />  
+                                    }
+                               
                                     {
                                       singleNews?.videoLink && <Video videoLink={singleNews.videoLink} />
                                     }
@@ -43,6 +47,7 @@ const NewsContent = props => {
                                 </h3>
                                 <div className="news-footer">
                                     <span><i className="fa fa-eye"></i>{singleNews.views} Views</span>
+                                    <span><i className="fa fa-comments"></i>{singleNews.Comments} Comments</span>
                                 </div>
                             </div>
                         </div>

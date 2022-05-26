@@ -1,49 +1,18 @@
+
 import { Link } from 'react-router-dom';
-import blogOneImage from '../../../assets//images/home/news-1.jpg';
-import blogTwoImage from '../../../assets//images/home/news-2.jpg';
-import blogThreeImage from '../../../assets//images/home/news-3.jpg';
-import authorImage from '../../../assets/images/home/author.png';
 
-const blogs = [
-    {
-        id: 1,
-        title: 'Building Next generation Quantum Machines',
-        category: 'Informatique',
-        author: 'Rosaline D. William',
-        authorImage: authorImage,
-        date: '14th May, 2021',
-        comments: '10 Comments',
-        featureImage: blogOneImage,
-        link: '#',
-        authorUrl: '#'
-    },
-    {
-        id: 2,
-        title: 'Les Moteurs a piston sont devenus obsolètes',
-        category: 'Mecanique',
-        author: 'Rosaline D. William',
-        authorImage: authorImage,
-        date: '14th May, 2021',
-        comments: '10 Comments',
-        featureImage: blogTwoImage,
-        link: '#',
-        authorUrl: '#'
-    },
-    {
-        id: 3,
-        title: ' les paneaux solaires nouvelles formes d\'energies',
-        category: 'Electronique',
-        author: 'Rosaline D. William',
-        authorImage: authorImage,
-        date: '14th May, 2021',
-        comments: '10 Comments',
-        featureImage: blogThreeImage,
-        link: '#',
-        authorUrl: '#'
-    }
-];
 
-const BlogOne = () => {
+
+const BlogOne = props => {
+
+    const {news, com} = props;
+    let posts =[];
+    const InfoPosts = news.filter(post => post.category==='info' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
+    {InfoPosts.length>0 && posts.push(InfoPosts.shift())};
+    const ElectroPosts = news.filter(post => post.category==='electro' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
+    {ElectroPosts.length>0 && posts.push(ElectroPosts.shift())};
+    const MecaPosts = news.filter(post => post.category==='meca' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
+    {MecaPosts.length>0 && posts.push(MecaPosts.shift())};
     return (
         <section className="news-section">
             <div className="container">
@@ -59,24 +28,24 @@ const BlogOne = () => {
 
                     {/* <!-- Single Post Start --> */}
                     {
-                        blogs?.map(blog => {
+                        posts?.map(p => {
                             return (
-                                <div key={blog?.id} className="col-lg-4 col-md-6">
+                                <div key={p?.id} className="col-lg-6 col-md-10">
                                     <div className="news-item">
                                         <div className="post-thumb">
-                                            <img src={blog.featureImage} alt="" />
-                                            <Link to={blog?.link} className="cate">{blog?.category}</Link>
+                                            <img src={p?.featureImg} alt="" />
+                                            <Link to={p?.link} className="cate">{p?.category}</Link>
                                         </div>
                                         <div className="post-details">
-                                            <Link to={blog?.authorUrl} className="author">
-                                                <img src={blog?.authorImage} alt="" />{blog?.author}
-                                            </Link>
+                                            {p?.author && <Link to={p?.authorUrl} className="author">
+                                            <img src={p?.authorImage} alt="" />{p?.author}</Link>
+                                            }
                                             <h4>
-                                                <Link to={blog?.link}>{blog?.title}</Link>
+                                                <Link to={p?.link}>{p?.title}</Link>
                                             </h4>
                                             <div className="post-footer">
-                                                <Link to="/"><i className="fa fa-calendar-alt"></i>{blog?.date}</Link>
-                                                <Link to="/"><i className="fa fa-comments"></i>{blog?.comments}</Link>
+                                                <Link to="/"><i className="fa fa-calendar-alt"></i>{p?.date}</Link>
+                                                <Link to="/"><i className="fa fa-comments"></i>{p?.views} Views</Link>
                                             </div>
                                         </div>
                                     </div>

@@ -4,7 +4,7 @@ import Tag from '../Tag/Tag';
 import TrendingPost from '../TrendingPost/TrendingPost';
 import widgetImage from '../../assets/images/news/widget-image.jpg';
 
-const NewsSidebar = () => {
+const NewsSidebar = props => {
     return (
         <div className="col-lg-4 col-md-12">
             <div className="news-sidebar">
@@ -16,7 +16,7 @@ const NewsSidebar = () => {
                     </form>
                 </aside>
 
-                <TrendingPost />
+                <TrendingPost news={props.news} com={props.com}/>
 
                 <Category />
 

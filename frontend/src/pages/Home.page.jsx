@@ -21,20 +21,6 @@ const Home = () => {
     //const userId = useParams().userId;
     // ne pas oublier  de chabger les paramettres de useEffect [sendRequest, userId]);
   
-    const mapArticlesToModels = (loadedArticles) =>{
-        loadedArticles.map((article, index) => ( setNews(N => [...N,{
-            id: article._id,
-            Oid: index+1,
-            title: article.title[0],
-            link: article.link[0],
-            category: article.cat,
-            categoryLink: '/',
-            videoLink: '',
-            featureImg: article['media:content'][0]?.url,
-            views: article.views,
-            date: article.pubDate
-        }])));
-    }
 
     useEffect(() => {
       const fetchArticles = async () => {
@@ -50,9 +36,11 @@ const Home = () => {
             category: article.cat,
             categoryLink: '/',
             videoLink: '',
-            featureImg: article['media:content'][0]?.url,
+            featureImg:article?.imagesrc ?? '',
             views: article.views,
-            date: article.pubDate[0].split(' ').slice(1,4)}])));
+            Comments : article.comments,
+            date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
+            }])));
         } catch (err) {}
       };
       fetchArticles();
@@ -73,11 +61,11 @@ const Home = () => {
                     <div className="row">
                     <div className="col-lg-8 col-md-12">
                        {/* Blog Section  */}
-                       <NewsFields />
+                       <NewsFields news={News} com ='0'/>
 
                     </div>
                         {/* Sidebar area  */}
-                        <NewsSidebar />
+                        <NewsSidebar news={News} com ='0'/>
 
                     </div>
             </section>

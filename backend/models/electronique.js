@@ -15,11 +15,22 @@ const ElecSchema = new Schema({
     type: Schema.Types.Mixed,
     required: true
   },
+  imagesrc: {
+    type: Schema.Types.Mixed,
+    default:''
+  },
   pubDate: {
     type: Schema.Types.Mixed
-  }
+  },
+  views: {
+    type: Schema.Types.Mixed,
+    default: 0
 
-  
-},{strict: false});
+  },
+  comments: {
+    type: Schema.Types.Mixed,
+    default: 0
 
-module.exports = ElecSchema = mongoose.model('electros', ElecSchema);
+  }},{strict: false});
+
+module.exports = ElectroCollection = mongoose.model('electros', ElecSchema);

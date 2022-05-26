@@ -15,10 +15,19 @@ const InfoSchema = new Schema({
     type: Schema.Types.Mixed,
     required: true
   },
+  imagesrc: {
+    type: Schema.Types.Mixed,
+    default:''
+  },
   pubDate: {
     type: Schema.Types.Mixed
   },
   views: {
+    type: Schema.Types.Mixed,
+    default: 0
+
+  },
+  comments: {
     type: Schema.Types.Mixed,
     default: 0
 
