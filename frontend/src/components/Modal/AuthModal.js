@@ -109,7 +109,7 @@ const ModalOverlay = props => {
       <Card className="authentication">
         {isLoading && <LoadingSpinner/>}
         <Button inverse onClick={switchModeHandler}>
-          SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
+          {isLoginMode ? 'CREATE AN ACCOUNT' : ' SUITCH TO LOGIN '}
         </Button>
         <hr />
         <form onSubmit={authSubmitHandler}>

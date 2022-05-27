@@ -1099,9 +1099,15 @@
     position: relative;
     width: 100%;
     height: 30rem;
-    padding: 120px 0 0;
     background: #14212b;
     margin: 0 0 50px;
+}
+
+.Events img{
+    position: relative;
+    width: 100%;
+    height: 30rem;
+  
 }
 
 .client-logo.owl-carousel{

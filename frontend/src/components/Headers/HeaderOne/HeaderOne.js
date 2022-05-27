@@ -66,7 +66,7 @@ const HeaderOne = () => {
                             {/* <!-- Appointment Btn --> */}
                             {/* <Link to="/auth" className="appoint-btn">Inscrire<i className="fa fa-long-arrow-right"></i></Link> */}
                             <div style={{ display: !auth.isLoggedIn ? "inline-block" : "none" }} className="appoint-btn" onClick={openAuthHandler}>
-                             Inscrire
+                             Log in
                              <i className="fa fa-long-arrow-right"></i>
                             </div>
                             {/* <!-- Contact Btn End --> */}

@@ -4,7 +4,7 @@ const pricings = [
     {
         id: 1,
         name: 'Recent Events',
-        price: 99,
+        price: 5,
         description: 'Recent Scientifique Events',
         features: [
             'Workshops', 'Conferences', 'Debates', 'Hackatons'
@@ -16,7 +16,7 @@ const pricings = [
     {
         id: 2,
         name: 'Projects & Tenders',
-        price: 199,
+        price: 10,
         description: 'Chose where to apply your skills',
         features: [
             'PFA', 'PFE', 'National Project', 'International Projet'
@@ -28,7 +28,7 @@ const pricings = [
     {
         id: 3,
         name: 'Magazine & Library',
-        price: 999,
+        price: 10,
         description: 'Receve our Recent Mgazine ',
         features: [
             'MDN Magazine', 'Scientifique Magazine', 'Scientifique Article','practical Manuscripts'
@@ -61,7 +61,7 @@ const Pricing = () => {
 
                                     <div className={`pricing-item text-center ${pricing?.class}`}>
                                         <p className="pack-name">{pricing?.name}</p>
-                                        <div className="price"><span>$</span>{pricing?.price}</div>
+                                        <div className="price"><span>TD</span>{pricing?.price}</div>
                                         <p className="description">{pricing?.description}</p>
                                         <ul>
                                             {

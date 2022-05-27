@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import ThemeSlider from '../../Sliders/ThemeSlider/ThemeSlider';
 import heroShape from '../../../assets/images/home/hero-shape.png';
 import heroBgImage from '../../../assets/images/home/hero.jpg';
-import partnerOneImage from '../../../assets/images/home/client-logo/1.png';
-import partnerTwoImage from '../../../assets/images/home/client-logo/2.png';
-import partnerThreeImage from '../../../assets/images/home/client-logo/3.png';
-import partnerFourImage from '../../../assets/images/home/client-logo/4.png';
-import partnerFiveImage from '../../../assets/images/home/client-logo/5.png';
+import partnerOneImage from '../../../assets/images/events/E1.jpg';
+import partnerTwoImage from '../../../assets/images/events/E2.jpg';
+import partnerThreeImage from '../../../assets/images/events/E3.jpg';
+
 import Video from '../../Video/Video';
 
 const partners = [
@@ -23,41 +22,6 @@ const partners = [
     {
         id: 3,
         image: partnerThreeImage,
-        link: '#'
-    },
-    {
-        id: 4,
-        image: partnerFourImage,
-        link: '#'
-    },
-    {
-        id: 5,
-        image: partnerFiveImage,
-        link: '#'
-    },
-    {
-        id: 6,
-        image: partnerOneImage,
-        link: '#'
-    },
-    {
-        id: 7,
-        image: partnerTwoImage,
-        link: '#'
-    },
-    {
-        id: 8,
-        image: partnerThreeImage,
-        link: '#'
-    },
-    {
-        id: 9,
-        image: partnerFourImage,
-        link: '#'
-    },
-    {
-        id: 10,
-        image: partnerFiveImage,
         link: '#'
     }
 ];
@@ -96,7 +60,7 @@ const BannerOne = () => {
                     <div className="col-lg-12 col-md-8">
                         <div className="banner-content">
                             <div className="sub-heading">
-                            L'expertise scientifique et technique de référence
+                            Benchmark scientific and technical expertise
                         	</div>
                             <ul>
                                 <li><Link className="quomodo-btn" to="/">Get Started Now <i className="fa fa-long-arrow-right"></i></Link></li>
@@ -109,10 +73,9 @@ const BannerOne = () => {
                                     {/* Partner Slider Section  */}
                                 <ThemeSlider images={partners} settings={settings} />
                             </div>
-                           <h2>l'éditeur technique et scientifique de référence</h2>
+                           <h2>The leading technical and scientific publisher</h2>
                             <p>
-                            Science de l’Ingénieur : l’outil déterminant des succès de l’industrie depuis plus de 70 ans.
-                            Le partenaire de référence pour la réussite de vos projets industriels.
+                            Engineering Science designed for academic and scientific events. We provide meaningful support to our custmers as well as a tool to manage the key requirements of their projects
                             </p>
                         </div>
                     </div>

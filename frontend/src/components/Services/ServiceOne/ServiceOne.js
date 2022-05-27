@@ -4,22 +4,22 @@ import { Link } from 'react-router-dom';
 const services = [
     {
         id: 1,
-        title: "Veille Personnalisé",
+        title: "Interractive Fllow Up",
         link: '#',
-        description: 'Alors c\'est quoi la veille personnalisé? C\'est d\'etre Fournis des actuelités et newsletter les plus pertinantes selon vos orientations les plus récentes.',
+        description: 'So what is a personalized follow-up? It is a question of providing you with the most relevant news according to your most recent orientations.',
         icon: 'fa-plus'
     },
     {
         id: 2,
         title: "Newsletter",
         link: '#',
-        description: 'Alors c\'est quoi la Newsletter, c\'est de recevoire quotidiènnement les actualités qui vous manques chez vous',
+        description: 'So what is the Newsletter, it is to delevre daily news that you miss at home',
         icon: 'fa-plus'
     }, {
         id: 3,
-        title: "A la Une",
+        title: "Headlines",
         link: '#',
-        description: 'Rester toujour informer par les évènnements scientifiques, les Coopération Nationale et internationale ainssi que les appels d\'offres qui vous interresse',
+        description: 'Always stay informed by scientific events, national and international cooperation as well as calls for tenders that interest you',
         icon: 'fa-plus'
     }
 ];
@@ -55,7 +55,7 @@ const ServiceOne = () => {
                                             <h3><Link to={service?.link}>{service?.title}</Link></h3>
                                         </div>
                                         <p>{service?.description}</p>
-                                        <Link className="read-more" to={service?.link}><i className={`fa ${service?.icon}`}></i>Read More</Link>
+                                        <Link className="read-more" to={service?.link}><i className={`fa ${service?.icon}`}></i>Subscribe</Link>
                                     </div>
                                 </div>
                             );

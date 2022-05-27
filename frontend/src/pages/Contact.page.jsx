@@ -4,12 +4,12 @@ import ContactSidebar from '../components/ContactSidebar/ContactSidebar';
 import MoveTop from '../components/MoveTop/MoveTop';
 
 const contactInfo = {
-    numberOne: "+00 125 456 888",
-    numberTwo: "+00 125 456 888",
-    emailOne: "contact@pritom.com",
-    emailTwo: "contact@pritom.com",
-    locationOne: "445 Main Street, New York",
-    locationTwo: "CA-12325, USA"
+    numberOne: "(+216) 717 601 65",
+    numberTwo: "(+216)717 601 29",
+    emailOne: "crm@defense.tn",
+    
+    locationOne: "Base Militaire Aouina, Cité Taieb Mhiri, Aouina, 2045 Tunis",
+    
 };
 
 const Contact = () => {

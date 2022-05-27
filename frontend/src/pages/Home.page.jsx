@@ -86,7 +86,7 @@ const Home = () => {
             {/* <SkillOne /> */}
 
             {/*StrategyOne Section  */}
-            <StrategyOne />
+            {/*<StrategyOne />*/}
 
             {/* Fun Facts Section 
             <FunFactOne /> */}

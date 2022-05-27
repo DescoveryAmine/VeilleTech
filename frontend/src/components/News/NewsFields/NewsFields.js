@@ -7,12 +7,15 @@ const BlogOne = props => {
 
     const {news, com} = props;
     let posts =[];
-    const InfoPosts = news.filter(post => post.category==='info' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
-    {InfoPosts.length>0 && posts.push(InfoPosts.shift())};
-    const ElectroPosts = news.filter(post => post.category==='electro' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
-    {ElectroPosts.length>0 && posts.push(ElectroPosts.shift())};
-    const MecaPosts = news.filter(post => post.category==='meca' && post.views===(Math.max(...news.map(p => p.views), 0)) && !post.featureImg.EMPTY);
-    {MecaPosts.length>0 && posts.push(MecaPosts.shift())};
+    const InfoPosts = news.filter(post => post.category==='info' && !post.featureImg.EMPTY);
+    const TInfoPosts = InfoPosts.filter(post => post.views===(Math.max(...InfoPosts.map(p => p.views), 0)));
+    {TInfoPosts.length>0 && posts.push(TInfoPosts.shift())};
+    const ElectroPosts = news.filter(post => post.category==='electro' &&!post.featureImg.EMPTY);
+    const TElectroPosts = ElectroPosts.filter(post => post.views===(Math.max(...ElectroPosts.map(p => p.views), 0)));
+    {TElectroPosts.length>0 && posts.push(TElectroPosts.shift())};
+    const MecaPosts = news.filter(post => post.category==='electro' && !post.featureImg.EMPTY);
+    const TMecaPosts = MecaPosts.filter(post => post.views===(Math.max(...MecaPosts.map(p => p.views), 0)));
+    {TMecaPosts.length>0 && posts.push(TMecaPosts.shift())};
     return (
         <section className="news-section">
             <div className="container">
