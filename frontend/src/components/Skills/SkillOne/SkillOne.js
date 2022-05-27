@@ -6,20 +6,20 @@ import VisibilitySensor from 'react-visibility-sensor';
 const skills = [
     {
         id: 1,
-        title: 'Business Growth',
-        skillNum: 80,
+        title: 'Science Growth',
+        skillNum: 0,
         image: skillShape
     },
     {
         id: 2,
         title: 'Product Value',
-        skillNum: 65,
+        skillNum: 0,
         image: skillShape
     },
     {
         id: 3,
         title: 'Active Clients',
-        skillNum: 73,
+        skillNum: 1,
         image: skillShape
     }
 ]
@@ -35,7 +35,7 @@ const SkillOne = () => {
                             <div className="sub-title"><span className="border-left"></span>Skillset</div>
                             <h3 className="sec-title">
                                 Innovative Solution
-                                For Business
+                                For Technologies
 	                        </h3>
                             <p className="sec-desc">
                                 A consultant is someone who has some level of expertise that a particular group of people find valuable, and people within that group are willing to pay the consultant.
