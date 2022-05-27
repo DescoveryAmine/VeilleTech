@@ -7,7 +7,7 @@ const contactInfo = {
     numberOne: "(+216) 717 601 65",
     numberTwo: "(+216)717 601 29",
     emailOne: "crm@defense.tn",
-    
+    emailTwo: "contact@pritom.com",
     locationOne: "Base Militaire Aouina, Cité Taieb Mhiri, Aouina, 2045 Tunis",
     
 };
@@ -41,7 +41,7 @@ const Contact = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="quomodo-map grayscale">
-                                <iframe src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;coord=39.966528,-75.158284&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=p&amp;z=16&amp;iwloc=B&amp;output=embed" scrolling="no"></iframe>
+                                <iframe src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;coord=36.8558737,10.2221889&amp;q=CEMEDA+-+مركز+الاختبارات+الطبية+للملاحة+الجوية%E2%80%AD&amp;ie=UTF8&amp;t=p&amp;z=16&amp;iwloc=B&amp;output=embed" scrolling="no"></iframe>
                             </div>
                         </div>
                     </div>
