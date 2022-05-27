@@ -1,37 +1,38 @@
 import { Link } from 'react-router-dom';
-import portfolioImgOne from '../../../assets/images/home3/portfolio/1.jpg';
-import portfolioImgTwo from '../../../assets/images/home3/portfolio/2.jpg';
-import portfolioImgThree from '../../../assets/images/home3/portfolio/3.jpg';
-import portfolioImgFour from '../../../assets/images/home3/portfolio/4.jpg';
-import portfolioImgFive from '../../../assets/images/home3/portfolio/5.jpg';
+import portfolioImgOne from '../../../assets/images/about/m0.jpg';
+import portfolioImgTwo from '../../../assets/images/about/m1.jpg';
+import portfolioImgThree from '../../../assets/images/about/m2.jpg';
+import portfolioImgFour from '../../../assets/images/about/m3.jpg';
+import portfolioImgFive from '../../../assets/images/about/m4.jpg';
 
 const portfolios = [
+    
     {
         id: 1,
         image: portfolioImgTwo,
-        name: 'Consulting',
-        company: 'Rosalina Print Co.',
+        name: 'Events',
+        company: 'Armed Forces',
         link: '/'
     },
     {
         id: 2,
         image: portfolioImgThree,
-        name: 'Consulting',
-        company: 'Rosalina Print Co.',
+        name: 'Events',
+        company: 'Armed Forces',
         link: '/'
     },
     {
         id: 3,
         image: portfolioImgFour,
-        name: 'Consulting',
-        company: 'Rosalina Print Co.',
+        name: 'Events',
+        company: 'Armed Forces',
         link: '/'
     },
     {
         id: 4,
         image: portfolioImgFive,
-        name: 'Consulting',
-        company: 'Rosalina Print Co.',
+        name: 'Events',
+        company: 'Armed Forces',
         link: '/'
     }
 ]
@@ -57,8 +58,8 @@ const PortfolioTwo = () => {
                         <div className="work-item work-item-2">
                             <img src={portfolioImgOne} alt="" />
                             <div className="work-detail">
-                                <Link className="cate" to="/">Consulting</Link>
-                                <h4><Link to="/">Rosalina Print Co.</Link></h4>
+                                <Link className="cate" to="/">Events</Link>
+                                <h4><Link to="/">Armed Forces</Link></h4>
                             </div>
                         </div>
                         {/* <!-- Work Item --> */}

@@ -1,4 +1,4 @@
-import skillImg from '../../../assets/images/home/skill.jpg';
+import skillImg from '../../../assets/images/about/m.png';
 import skillShape from '../../../assets/images/home/skill-shape.png';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -38,7 +38,11 @@ const SkillOne = () => {
                                 For Technologies
 	                        </h3>
                             <p className="sec-desc">
-                                A consultant is someone who has some level of expertise that a particular group of people find valuable, and people within that group are willing to pay the consultant.
+                            The creation of the center aims to promote military research in
+areas that concern the specific needs of the armed forces.
+It will work to mobilize military and civilian skills and experts and to establish
+partnership links with other research centres, bodies and associations
+national and international concerned with scientific fields.
 	                        </p>
                             <div className="skill-wrapper">
 
