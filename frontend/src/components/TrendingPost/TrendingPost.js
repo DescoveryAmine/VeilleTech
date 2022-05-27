@@ -18,7 +18,7 @@ const TrendingPost = props => {
                         <div key={post?.id} className="tr-post">
                             <h5><Link to={post?.link}>{post?.title}</Link>
                             </h5>
-                            <span><i className="fa fa-calendar-alt"></i>24 March, 2020</span>
+                            <span><i className="fa fa-calendar-alt"></i>{post?.date}</span>
                         </div>
                     )
                 })

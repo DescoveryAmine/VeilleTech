@@ -1,7 +1,6 @@
 import BannerTwo from '../components/Banners/BannerTwo/BannerTwo';
-import ServiceOne from '../components/Services/ServiceOne/ServiceOne';
 import SkillOne from '../components/Skills/SkillOne/SkillOne';
-import Testimonial from '../components/Testimonial/Testimonial';
+import PortfolioOne from '../components/Portfolios/PortfolioTwo/PortfolioTwo';
 import MoveTop from '../components/MoveTop/MoveTop';
 
 const About = () => {
@@ -13,9 +12,10 @@ const About = () => {
             {/*Skill Section  */}
             <SkillOne />
 
-            {/* Testimonial Section  */}
-            <Testimonial />
 
+            {/*Portfolio Section  */}
+            <PortfolioOne /> 
+            
             {/* Move to top Section  */}
             <MoveTop path="/about" />
 

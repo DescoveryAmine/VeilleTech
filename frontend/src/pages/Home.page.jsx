@@ -91,9 +91,6 @@ const Home = () => {
             {/* Fun Facts Section 
             <FunFactOne /> */}
 
-            {/*Portfolio Section  */}
-            {/* <PortfolioOne /> */}
-
             {/* Call To Action Two Section  */}
             <CallToActionTwo />
 

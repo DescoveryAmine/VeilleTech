@@ -1,7 +1,92 @@
 import authorImageOne from '../../assets/images/home3/author.png';
 import authorImageTwo from '../../assets/images/home3/author-2.png';
 import Slider from "react-slick";
-import { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
+
+function SampleNextArrow({ classes, newStyle, onClick }) {
+    return (
+        <div
+            className={`${classes}`}
+            style={{ ...newStyle }}
+            onClick={onClick}
+        ><i className="fa fa-arrow-right" aria-hidden="true"></i></div>
+    );
+}
+
+function SamplePrevArrow({ classes, newStyle, onClick }) {
+    return (
+        <div
+            className={classes}
+            style={{ ...newStyle }}
+            onClick={onClick}
+        ><i className="fa fa-arrow-left" aria-hidden="true"></i></div>
+    );
+}
+
+const navSettings = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    arrows: false,
+    centerMode: true,
+    centerPadding: 0,
+    focusOnSelect: true,
+    slide: "ul",
+    responsive: [
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1
+            }
+        }
+    ]
+}
+
+
+const style = {
+    background: '#ff4a17',
+    width: '80px',
+    height: '80px',
+    textAlign: 'center',
+    margin: 0,
+    padding: 0,
+    display: 'inline-block',
+    fontSize: '18px',
+    lineHeight: '80px',
+    opacity: 1,
+    top: '40%',
+    transition: 'all 0.4s ease',
+    cursor: 'pointer'
+}
+
+
+
+
+const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow classes="carousel-control-next" newStyle={style} />,
+    prevArrow: <SamplePrevArrow classes="carousel-control-prev" newStyle={style} />,
+    responsive: [
+        {
+            breakpoint: 640,
+            settings: {
+                slidesToShow: 1
+            }
+        },
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 1
+            }
+        },
+
+    ]
+}
 
 const testimonials = [
     {
@@ -36,53 +121,25 @@ const testimonials = [
     }
 ];
 
-class Testimonial extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            nav1: null,
-            nav2: null
-        };
-    }
+const Testimonial= props => {
 
-    componentDidMount() {
-        this.setState({
-            nav1: this.slider1,
-            nav2: this.slider2
-        });
-    }
+    let slider1;
+    let slider2;
 
-    render() {
-        const sliderSettings = {
-            autoplay: true,
-            autoplaySpeed: 3000,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            dots: false,
-            arrows: false,
-            infinite: true,
-            centerMode: true,
-            centerPadding: 0,
-        }
+    const [state, setState] = useState({
+        nav1: null,
+        nav2: null
+    });
 
-        const navSettings = {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            dots: false,
-            arrows: false,
-            centerMode: true,
-            centerPadding: 0,
-            focusOnSelect: true,
-            slide: "ul",
-            responsive: [
-                {
-                    breakpoint: 767,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        }
+useEffect(()=>{
+
+    setState({
+        nav1: slider1,
+        nav2: slider2
+    });
+
+},[])
+
 
         return (
             <section className="testimonial-section ab-tesimonial">
@@ -93,8 +150,8 @@ class Testimonial extends Component {
                             {/* Slick Slider  */}
 
                             <Slider className="testimonial-slider"
-                                asNavFor={this.state.nav2}
-                                ref={slider => (this.slider1 = slider)}
+                                asNavFor={state.nav2}
+                                ref={slider => (slider1 = slider)}
                                 {...sliderSettings}
                             >
                                 {
@@ -124,8 +181,8 @@ class Testimonial extends Component {
 
                             <Slider
                                 className="slider-nav"
-                                asNavFor={this.state.nav1}
-                                ref={slider => (this.slider2 = slider)}
+                                asNavFor={state.nav1}
+                                ref={slider => (slider2 = slider)}
                                 slidesToShow={3}
                                 swipeToSlide={true}
                                 focusOnSelect={true}
@@ -150,7 +207,6 @@ class Testimonial extends Component {
                 </div>
             </section>
         );
-    }
 };
 
 export default Testimonial;
