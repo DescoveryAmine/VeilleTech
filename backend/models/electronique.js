@@ -17,7 +17,7 @@ const ElecSchema = new Schema({
   },
   imagesrc: {
     type: Schema.Types.Mixed,
-    default:''
+    default:'http://localhost:5000/models/img/electronique.jpg'
   },
   pubDate: {
     type: Schema.Types.Mixed

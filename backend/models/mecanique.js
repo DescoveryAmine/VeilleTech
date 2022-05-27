@@ -17,7 +17,7 @@ const MecaSchema = new Schema({
   },
   imagesrc: {
     type: Schema.Types.Mixed,
-    default:''
+    default:'http://localhost:5000/models/img/mecanique.jpg'
   },
   pubDate: {
     type: Schema.Types.Mixed

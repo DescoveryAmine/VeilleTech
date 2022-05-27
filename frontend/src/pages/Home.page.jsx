@@ -36,7 +36,7 @@ const Home = () => {
             category: article.cat,
             categoryLink: '/',
             videoLink: '',
-            featureImg:article?.imagesrc ?? '',
+            featureImg:article?.imagesrc,
             views: article.views,
             Comments : article.comments,
             date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)

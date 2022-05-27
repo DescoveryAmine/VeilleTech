@@ -39,10 +39,10 @@ const SkillOne = () => {
 	                        </h3>
                             <p className="sec-desc">
                             The creation of the center aims to promote military research in
-areas that concern the specific needs of the armed forces.
-It will work to mobilize military and civilian skills and experts and to establish
-partnership links with other research centres, bodies and associations
-national and international concerned with scientific fields.
+                            areas that concern the specific needs of the armed forces.
+                            It will work to mobilize military and civilian skills and experts and to establish
+                            partnership links with other research centres, bodies and associations
+                            national and international concerned with scientific fields.
 	                        </p>
                             <div className="skill-wrapper">
 

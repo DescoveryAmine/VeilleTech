@@ -5,6 +5,7 @@ const rssmodel_0 = require('./RSS/rssEmptyModel');
 const rssmodel_1 = require('./RSS/rssModelOne');
 const rssmodel_2 = require('./RSS/rssModelTow');
 const URLS = require('./config/urls');
+const path = require('path');
 
 const newsRoutes = require('./routes/si-routes');
 const usersRoutes = require('./routes/users-routes');
@@ -18,9 +19,14 @@ const app = express();
 // DB Config
 const db = require('./config/keys').mongoURI;
 const {  infourls, elctrourls, mecaurls} = URLS;
-
+ //default rss fields img
+ const infoImg = 'http://localhost:5000/models/img/informatique.jpg';
+ const electroImg = 'http://localhost:5000/models/img/electronique.jpg';
+ const mecaImg = 'http://localhost:5000/models/img/mecanique.jpg';
 
 app.use(bodyParser.json());
+
+app.use('/models/img', express.static(path.join('models', 'img')));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -49,17 +55,17 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-const fetchNews = (URL,Schema) =>{
+const fetchNews = (URL,Schema,imgSrc) =>{
   URL.forEach(element =>{
     switch (element['Mid']) {
       case 1:
-        rssmodel_1.createArticles(element['Link'],Schema);
+        rssmodel_1.createArticles(element['Link'],Schema,imgSrc);
         break;
       case 2:
-        rssmodel_2.createArticles(element['Link'],Schema);
+        rssmodel_2.createArticles(element['Link'],Schema,imgSrc);
         break;
       default:
-      rssmodel_0.createArticles(element['Link'],Schema);
+       rssmodel_0.createArticles(element['Link'],Schema,imgSrc);
 
 };
 })
@@ -68,9 +74,9 @@ const fetchNews = (URL,Schema) =>{
 mongoose
   .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true})
   .then(() => {
-    fetchNews(mecaurls,MecaCollection);
-    fetchNews(infourls,InfoCollection);
-    fetchNews(elctrourls,ElectroCollection);
+    fetchNews(mecaurls,MecaCollection,mecaImg);
+    fetchNews(infourls,InfoCollection,infoImg);
+    fetchNews(elctrourls,ElectroCollection,electroImg);
   
   app.listen(5000);
   console.log("server running on 5000");

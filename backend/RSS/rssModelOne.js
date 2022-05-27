@@ -4,7 +4,7 @@ const HttpError = require('../models/http-error');
 
 
 
-const createArticles = async (URL,schema) => {
+const createArticles = async (URL,schema,defaultImg) => {
 
   let articles = [];
 
@@ -22,7 +22,7 @@ const createArticles = async (URL,schema) => {
         const items = docs.rss.channel[0].item;
         
         for (var i = 0; i < items.length; i++) {
-          const img=items[i]?.['media:content'] ? items[i]['media:content'][0].url :''; 
+          const img=items[i]?.['media:content'] ? items[i]['media:content'][0].url : defaultImg; 
           articles.push({...items[i], imagesrc : img});
         }
         schema.insertMany(articles, function(err, res) {

@@ -7,13 +7,13 @@ const BlogOne = props => {
 
     const {news, com} = props;
     let posts =[];
-    const InfoPosts = news.filter(post => post.category==='info' && !post.featureImg.EMPTY);
+    const InfoPosts = news.filter(post => post.category==='info');
     const TInfoPosts = InfoPosts.filter(post => post.views===(Math.max(...InfoPosts.map(p => p.views), 0)));
     {TInfoPosts.length>0 && posts.push(TInfoPosts.shift())};
-    const ElectroPosts = news.filter(post => post.category==='electro' &&!post.featureImg.EMPTY);
+    const ElectroPosts = news.filter(post => post.category==='electro');
     const TElectroPosts = ElectroPosts.filter(post => post.views===(Math.max(...ElectroPosts.map(p => p.views), 0)));
     {TElectroPosts.length>0 && posts.push(TElectroPosts.shift())};
-    const MecaPosts = news.filter(post => post.category==='electro' && !post.featureImg.EMPTY);
+    const MecaPosts = news.filter(post => post.category==='meca');
     const TMecaPosts = MecaPosts.filter(post => post.views===(Math.max(...MecaPosts.map(p => p.views), 0)));
     {TMecaPosts.length>0 && posts.push(TMecaPosts.shift())};
     return (
