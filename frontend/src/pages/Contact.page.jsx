@@ -7,7 +7,6 @@ const contactInfo = {
     numberOne: "(+216) 717 601 65",
     numberTwo: "(+216)717 601 29",
     emailOne: "crm@defense.tn",
-    emailTwo: "contact@pritom.com",
     locationOne: "Base Militaire Aouina, Cité Taieb Mhiri, Aouina, 2045 Tunis",
     
 };
