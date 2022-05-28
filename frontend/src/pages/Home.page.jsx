@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import {toast, ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { useHttpClient } from '../hooks/http-hook';
 import LoadingSpinner from '../components/Loading/Loading';
 import Pricing from '../components/Pricing/Pricing';
@@ -41,7 +43,9 @@ const Home = () => {
             Comments : article.comments,
             date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
             }])));
-        } catch (err) {}
+        } catch (err) {
+          toast.error(`${err} ! please tray again`);
+        }
       };
       fetchArticles();
     }, [sendRequest]);
@@ -50,12 +54,9 @@ const Home = () => {
     return (
         <>
             {isLoading && <LoadingSpinner/>}
-            <div>
-               {error&&(<p>{error}</p>)}
-            </div>
             {/* Banner Section */}
+            <ToastContainer/>
             <BannerOne />
-
             {/* Content  */}
             <section className="news">
                     <div className="row">

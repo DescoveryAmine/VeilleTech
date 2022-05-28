@@ -6,6 +6,8 @@ import Card from '../../components/Card/Card';
 import Input from '../../components/Form/Input';
 import Button from '../../components/Form/Button';
 import LoadingSpinner from '../../components/Loading/Loading';
+import {toast, ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -77,7 +79,9 @@ const ModalOverlay = props => {
           }
         );
         auth.login(responseData.user.id,responseData.user.name);
-      } catch (err) {}
+      } catch (err) {
+        toast.error(`${err} ! please tray again`);
+      }
     } else {
       try {
         const responseData = await sendRequest(
@@ -95,7 +99,9 @@ const ModalOverlay = props => {
 
         auth.login(responseData.user.id,responseData.user.name);
         setIsLoginMode(true);
-      } catch (err) {}
+      } catch (err) {
+        toast.error(`${err} ! please tray again`);
+      }
     }
   };
 
@@ -149,9 +155,6 @@ const ModalOverlay = props => {
           </Button>
         </form>
       </Card>
-      <div>
-       {error&&(<p>{error}</p>)}
-      </div>
       </React.Fragment>
     </div>
   );
@@ -162,6 +165,7 @@ const AuthModal = props => {
   const auth = useContext(AuthContext);
   return (
     <React.Fragment>
+      <ToastContainer/>
       {!auth.isLoggedIn? props.show?<Backdrop onClick={props.onCancel}/>:props.show:props.onCancel}
       <CSSTransition
         in={props.show?!auth.isLoggedIn:props.show}
