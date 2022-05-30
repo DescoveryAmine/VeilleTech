@@ -44,7 +44,8 @@ const Home = () => {
             date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
             }])));
         } catch (err) {
-          toast.error(`${err} ! please tray again`);
+          toast.error(`${error} ! please tray again`);
+          clearError();
         }
       };
       fetchArticles();

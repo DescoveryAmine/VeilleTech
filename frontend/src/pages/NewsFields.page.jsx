@@ -1,68 +1,50 @@
+import React, { useEffect, useState } from 'react';
+import {toast, ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { useHttpClient } from '../hooks/http-hook';
+import LoadingSpinner from '../components/Loading/Loading';
 import BannerTwo from '../components/Banners/BannerTwo/BannerTwo';
-import NewsFieldContent from '../components/NewsContent/NewsFildContent';
-import NewsSidebar from '../components/NewsSidebar/NewsSidebar';
-import newsImageOne from '../assets/images/news/1.jpg';
-import newsImageTwo from '../assets/images/news/2.jpg';
-import newsImageThree from '../assets/images/news/3.jpg';
+import FieldContent from '../components/Testimonial/Testimonial';
 import MoveTop from '../components/MoveTop/MoveTop';
 
-const news = [
-    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet, consecte cing elit, sed do eiusmod tempor.',
-        link: '/',
-        category: 'Informatique',
-        categoryLink: '/',
-        videoLink: '',
-        featureImg: newsImageOne,
-        galleryImages: [
-            { id: 1, image: newsImageThree, link: "#" },
-            { id: 2, image: newsImageTwo, link: "#" },
-            { id: 3, image: newsImageOne, link: "#" }
-        ],
-        views: '232',
-        comments: '35',
-        date: '24th March 2021'
-    },
-    {
-        id: 2,
-        title: 'Lorem ipsum dolor sit amet, consecte cing elit, sed do eiusmod tempor.',
-        link: '/',
-        category: 'Mecanique',
-        categoryLink: '/',
-        videoLink: 'LXb3EKWsInQ',
-        featureImg: newsImageTwo,
-        galleryImages: [
-            { id: 1, image: newsImageThree, link: "#" },
-            { id: 2, image: newsImageTwo, link: "#" },
-            { id: 3, image: newsImageOne, link: "#" }
-        ],
-        views: '232',
-        comments: '35',
-        date: '24th March 2021'
-    },
-    {
-        id: 3,
-        title: 'Lorem ipsum dolor sit amet, consecte cing elit, sed do eiusmod tempor.',
-        link: '/',
-        category: 'Electronique',
-        categoryLink: '/',
-        videoLink: '',
-        featureImg: newsImageTwo,
-        galleryImages: [
-            { id: 1, image: newsImageThree, link: "#" },
-            { id: 2, image: newsImageTwo, link: "#" },
-            { id: 3, image: newsImageOne, link: "#" }
-        ],
-        views: '232',
-        comments: '35',
-        date: '24th March 2021'
-    }
-]
+const NewsFields = () => {
 
-const News = () => {
+    const [News, setNews]= useState([]);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+          try {
+            const responseData = await sendRequest(
+              `http://localhost:5000/api/news/news-fields/`
+            );
+             responseData.articles.map((article) => ( setNews(N => [...N,
+              {
+              id: article._id,
+              title: article.title[0],
+              link: article.link[0],
+              category: article.cat,
+              categoryLink: '/',
+              videoLink: '',
+              featureImg:article?.imagesrc,
+              views: article.views,
+              Comments : article.comments,
+              date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
+              }])));
+          } catch (err) {
+            toast.error(`${error} ! please tray again`);
+            clearError();
+          }
+        };
+        fetchArticles();
+      }, [sendRequest]);
+
     return (
         <>
+                
+            {isLoading && <LoadingSpinner/>}
+            {/* Banner Section */}
+            <ToastContainer/>
             {/* Page Banner section  */}
             <BannerTwo pageTitle="News Fields" title="News" />
 
@@ -70,7 +52,7 @@ const News = () => {
             <section className="news-page">
                     <div className="row">
                         {/* Content area  */}
-                        <NewsFieldContent news={news} />
+                        <FieldContent news={News} com='0'/>
                     </div>
             </section>
             {/* Move to top Section  */}
@@ -79,4 +61,4 @@ const News = () => {
     );
 };
 
-export default News;
+export default NewsFields;

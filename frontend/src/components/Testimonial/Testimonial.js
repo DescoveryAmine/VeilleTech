@@ -1,6 +1,6 @@
-import authorImageOne from '../../assets/images/home3/author.png';
-import authorImageTwo from '../../assets/images/home3/author-2.png';
+import Pagination from '../Pagination/Pagination';
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 
@@ -88,40 +88,11 @@ const sliderSettings = {
     ]
 }
 
-const testimonials = [
-    {
-        id: 1,
-        review: "“ Online proofing smart review allows pages within multi page documents to be treated as .Aproove was built to be content - based rather than proof - based.”",
-        stars: 5,
-        authorName: 'Kane D William',
-        designation: 'CEO, Print Co.',
-        authorImage: authorImageOne
-    },
-    {
-        id: 2,
-        review: "“ Online proofing smart review allows pages within multi page documents to be treated as .Aproove was built to be content - based rather than proof - based.”",
-        stars: 5,
-        authorName: 'Rosalina D William',
-        designation: 'CEO, Print Co.',
-        authorImage: authorImageTwo
-    }, {
-        id: 3,
-        review: "“ Online proofing smart review allows pages within multi page documents to be treated as .Aproove was built to be content - based rather than proof - based.”",
-        stars: 5,
-        authorName: 'Thomas D William',
-        designation: 'CEO, Print Co.',
-        authorImage: authorImageOne
-    }, {
-        id: 4,
-        review: "“ Online proofing smart review allows pages within multi page documents to be treated as .Aproove was built to be content - based rather than proof - based.”",
-        stars: 5,
-        authorName: 'Kane D William',
-        designation: 'CEO, Print Co.',
-        authorImage: authorImageTwo
-    }
-];
+
 
 const Testimonial= props => {
+
+    const {news , com} = props;
 
     let slider1;
     let slider2;
@@ -140,14 +111,38 @@ useEffect(()=>{
 
 },[])
 
+    let posts =[];
+    const InfoPosts = news.filter(post => post.category==='info');
+    {InfoPosts.length>0 && posts.push(InfoPosts)};
+    const ElectroPosts = news.filter(post => post.category==='electro');
+    {ElectroPosts.length>0 && posts.push(ElectroPosts)};
+    const MecaPosts = news.filter(post => post.category==='meca');
+    {MecaPosts.length>0 && posts.push(MecaPosts)};
 
+    const [pageNumber, setPageNumber] = useState(0);
+    const postsPerPage = 1;
+    const postVisited = pageNumber * postsPerPage;
+    const currentPosts = posts.slice(postVisited, postVisited + postsPerPage);
+    const pageCount = Math.ceil(posts.length / postsPerPage);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    }
+
+    
+return (
+    <div className="col-lg-12 col-md-8">
+        <div className="container">
+        {
+            currentPosts?.map(Field => {
         return (
             <section className="testimonial-section ab-tesimonial">
-                <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-
                             {/* Slick Slider  */}
+                            <div className="post-thumb">
+                                <i className="fcate">{Field[0]?.category}</i>
+                            </div>
 
                             <Slider className="testimonial-slider"
                                 asNavFor={state.nav2}
@@ -155,23 +150,23 @@ useEffect(()=>{
                                 {...sliderSettings}
                             >
                                 {
-                                    testimonials?.map(testimonial => {
+                                    Field.map(testimonial => {
                                         return (
                                             <div key={testimonial?.id} className="testimonial-item">
-                                                <div className="testi-author">
+                                            {!!testimonial?.author &&   <div className="testi-author">
                                                     <div className="test-shape-1"></div>
                                                     <img src={testimonial.authorImage} alt="" />
                                                     <div className="test-shape-2"></div>
-                                                </div>
+                                                </div>}
                                                 <div className="testi-quote">
                                                     <div className="rating">
-                                                        {Array.from(Array(testimonial.stars), (e, i) => {
+                                                        {Array.from(Array(testimonial.views), (e, i) => {
                                                             return <i key={i} className="fa fa-star"></i>
                                                         })}
                                                     </div>
-                                                    <p>
-                                                        “ Online proofing smart review allows pages within multi page documents to be treated as . Aproove was built to be content-based rather than proof-based. ”
-                                                    </p>
+                                                    <div className="postField-thumb">
+                                                      <img src={testimonial?.featureImg} alt="" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
@@ -189,11 +184,11 @@ useEffect(()=>{
                                 {...navSettings}
                             >
                                 {
-                                    testimonials?.map(testimonial => {
+                                    Field.map(testimonial => {
                                         return (
                                             <div key={testimonial?.id} role="presentation">
                                                 <div className="author-meta">
-                                                    <h5>{testimonial.authorName}</h5>
+                                                    <h5><Link to={testimonial?.link}>{testimonial?.title}</Link></h5>
                                                     <p className="designation">{testimonial.designation}</p>
                                                 </div>
                                             </div>
@@ -204,9 +199,18 @@ useEffect(()=>{
 
                         </div>
                     </div>
-                </div>
             </section>
-        );
+        )
+        
+        })}
+    </div>
+    {/* Pagination  */}
+
+    <Pagination pageCount={pageCount} changePage={changePage} />
+
+    </div>
+    );
+        
 };
 
 export default Testimonial;

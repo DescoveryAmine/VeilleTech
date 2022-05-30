@@ -8,6 +8,8 @@ const URLS = require('./config/urls');
 const path = require('path');
 
 const newsRoutes = require('./routes/si-routes');
+const newsFieldsRoutes = require('./routes/news/fields-routes');
+const newsArticlesRoutes = require('./routes/news/articles-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
 const InfoCollection = require('./models/informatique');
@@ -40,6 +42,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/news', newsRoutes);
+app.use('/api/news/news-fields', newsFieldsRoutes);
+app.use('/api/news/news-articles', newsArticlesRoutes);
 app.use('/api/users', usersRoutes);
 
 app.use((req, res, next) => {

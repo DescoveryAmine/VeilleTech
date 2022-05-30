@@ -987,6 +987,14 @@
     width: 100%;
     height: auto;
 }
+.postField-thumb{
+    position: relative;
+    margin: 0 0 0;
+}
+.postField-thumb img{
+    width: 100%;
+    height: 25rem;
+}
 .post-thumb:after{
     position: absolute;
     left: 0;
@@ -1012,7 +1020,31 @@
     left: 40px;
     top: -20px;
 }
+
+
 .post-thumb .cate:hover{
+    background: #14212b;
+    color: #fff;
+}
+
+.post-thumb .fcate{
+    background: #ff4a17;
+    font-size: 16px;
+    text-align: center;
+    line-height: .8;
+    color: #fff;
+    display: inline-block;
+    font-weight: 700;
+    padding: 14px 30px;
+    height: 40px;
+    position: absolute;
+    z-index: 2;
+    left: 30.5rem;
+    top: 0px;
+}
+
+
+.post-thumb .fcate:hover{
     background: #14212b;
     color: #fff;
 }
@@ -2365,7 +2397,7 @@ footer.f2-color .quomodo-btn:hover{
 .testimonial-section{
     position: relative;
     background: #f3f7fb;
-    padding: 120px 0;
+    padding: 20px 0;
     margin-bottom: 120px;
     margin-bottom: 10rem;
 }
@@ -2375,7 +2407,7 @@ footer.f2-color .quomodo-btn:hover{
 .testimonial-item{
     position: relative;
     text-align: center;
-    margin: 0 0 40px;
+    margin: 50px 0 40px;
 }
 .testi-author{
     position: relative;
@@ -3403,7 +3435,7 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 /*--- Sidebar Css ---*/
 .news-sidebar{
     position: relative;
-    padding: 0 45px;
+    
 }
 .news-sidebar .widget{
     position: relative;
@@ -3606,7 +3638,7 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 .single-news-page{
     position: relative;
     z-index: 2;
-    padding: 120px 0;
+    padding: 20px 0;
     margin-bottom: 10rem;
 }
 .single-news-page:after{

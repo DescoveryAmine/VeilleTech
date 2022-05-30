@@ -1,9 +1,9 @@
 import React from 'react';
 import Category from '../Category/Category';
-import TrendingPost from '../TrendingPost/TrendingPost';
+import PostArticles from '../Posts/postArticles';
 
 
-const NewsSidebar = props => {
+const NewsArticlesSidebar = props => {
     return (
         <div className="col-lg-4 col-md-12">
             <div className="news-sidebar">
@@ -15,7 +15,7 @@ const NewsSidebar = props => {
                     </form>
                 </aside>
 
-                <TrendingPost news={props.news} com={props.com}/>
+                <PostArticles news={props.news} com={props.com}/>
 
                 <Category />
 
@@ -29,4 +29,4 @@ const NewsSidebar = props => {
     );
 };
 
-export default NewsSidebar;
+export default NewsArticlesSidebar;

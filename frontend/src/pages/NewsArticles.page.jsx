@@ -1,9 +1,12 @@
+import React, { useEffect, useState } from 'react';
+import {toast, ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { useHttpClient } from '../hooks/http-hook';
+import LoadingSpinner from '../components/Loading/Loading';
 import BannerTwo from '../components/Banners/BannerTwo/BannerTwo';
-import NewsSidebar from '../components/NewsSidebar/NewsSidebar';
+import ArticlesSidebar from '../components/NewsArticleSideBar/articleSideBar';
 import gridImageOne from '../assets/images/portfolio-details/2.jpg';
-import gridImageTwo from '../assets/images/portfolio-details/3.jpg';
 import ImageGridTwoColumn from '../components/ImageGrid/ImageGridTwoColumn';
-import gridImageThree from '../assets/images/news-details/blockquote.jpg';
 import authorImage from '../assets/images/news-details/author.jpg';
 import Author from '../components/Author/Author';
 import { Link } from 'react-router-dom';
@@ -11,34 +14,14 @@ import ShareButtons from '../components/ShareButtons/ShareButtons';
 import Comment from '../components/Comment/Comment';
 import MoveTop from '../components/MoveTop/MoveTop';
 
-const images = [gridImageOne, gridImageTwo];
+const images = [gridImageOne];
 
 const singlePost = {
     id: 1,
     name: '',
     description: `
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
-        </p>
-        <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia.
-        </p>
-    `,
-    moreDescription: `
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
-        </p>
-        <blockquote>
-            <cite><img src=${gridImageThree} alt="" /> by Hetmayar</cite>
-            <p>
-                Viral dreamcatcher keytar typewriter, aest hetic offal umami. Aesthetic polaroid pug pitchfork post-ironic.
-        </p>
-        </blockquote>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
         </p>
     `,
     authorName: "Rosalina Williamson",
@@ -51,9 +34,43 @@ const singlePost = {
 
 const SingleNews = () => {
 
+    const [News, setNews]= useState([]);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    
+
+    useEffect(() => {
+      const fetchArticles = async () => {
+        try {
+          const responseData = await sendRequest(
+            `http://localhost:5000/api/news/news-articles/`
+          );
+           responseData.articles.map((article) => ( setNews(N => [...N,
+            {
+            id: article._id,
+            title: article.title[0],
+            link: article.link[0],
+            category: article.cat,
+            categoryLink: '/',
+            videoLink: '',
+            featureImg:article?.imagesrc,
+            views: article.views,
+            Comments : article.comments,
+            date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
+            }])));
+        } catch (err) {
+          toast.error(`${error} ! please tray again`);
+          clearError();
+        }
+      };
+      fetchArticles();
+    }, [sendRequest]);
+
     return (
         <>
-
+        
+            {isLoading && <LoadingSpinner/>}
+            {/* Banner Section */}
+            <ToastContainer/>
             {/* Page Banner section  */}
             <BannerTwo pageTitle="News Feeds" title="News Details" />
 
@@ -68,10 +85,6 @@ const SingleNews = () => {
                                 }}></div>
 
                                 <ImageGridTwoColumn images={images} />
-
-                                <div dangerouslySetInnerHTML={{
-                                    __html: singlePost.moreDescription
-                                }}></div>
 
                                 <div className="pagination-share">
                                     <div className="post-pagination">
@@ -100,7 +113,7 @@ const SingleNews = () => {
                         </div>
 
                         {/* Sidebar area  */}
-                        <NewsSidebar />
+                        <ArticlesSidebar news = {News} />
 
                     </div>
                 </div>
