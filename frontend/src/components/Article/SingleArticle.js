@@ -53,7 +53,7 @@ const NewsArticle = props => {
           </div>
 
           {/* Author section  */}
-          <Author singlePost={singlePost} />
+          {news[0]?.author && <Author singlePost={news[0]} />}
 
       </div>
 

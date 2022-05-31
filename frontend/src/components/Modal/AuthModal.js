@@ -78,7 +78,8 @@ const ModalOverlay = props => {
             'Content-Type': 'application/json'
           }
         );
-        auth.login(responseData.user.id,responseData.user.name);
+        const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp * 1000;
+        auth.login(responseData.userId, responseData.userName, responseData.token , expirationDate);
       } catch (err) {
         toast.error(`${err} ! please tray again`);
       }
@@ -96,11 +97,11 @@ const ModalOverlay = props => {
             'Content-Type': 'application/json'
           }
         );
-
-        auth.login(responseData.user.id,responseData.user.name);
+        const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp * 1000;
+        auth.login(responseData.userId, responseData.userName, responseData.token, expirationDate);
         setIsLoginMode(true);
       } catch (err) {
-        toast.error(`${err} ! please tray again`);
+        toast.error(`${error}`);
       }
     }
   };

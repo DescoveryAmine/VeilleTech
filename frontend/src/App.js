@@ -4,6 +4,7 @@ import PostAuthroutes from "./routes/PostAuthRoutes";
 import AfterAuthroutes from "./routes/AfterAuthRoutes";
 import Loading from "./components/Loading/Loading";
 import { AuthContext } from './context/auth-context';
+import { useAuth } from './hooks/auth-hook';
 import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 
 //ok
@@ -12,24 +13,12 @@ import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const { token, login, logout, userId, userName } = useAuth();
 
-  const login = useCallback((uid,name) => {
-    setIsLoggedIn(true);
-    setUserId(uid);
-    setUserName(name);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUserId(null);
-  }, []);
 
   let routes;
 
-  if (isLoggedIn) {
+  if (!!token) {
     routes = (
       <Switch>
       {
@@ -73,9 +62,10 @@ function App() {
 
     <AuthContext.Provider
     value={{
-      isLoggedIn: isLoggedIn,
+      isLoggedIn: !!token,
       userId: userId,
       userName : userName,
+      token: token,
       login: login,
       logout: logout
     }}
