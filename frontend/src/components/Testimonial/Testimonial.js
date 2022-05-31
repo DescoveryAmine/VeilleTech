@@ -112,11 +112,11 @@ useEffect(()=>{
 },[])
 
     let posts =[];
-    const InfoPosts = news.filter(post => post.category==='info');
+    const InfoPosts = news.filter(post => post.category==='informatique');
     {InfoPosts.length>0 && posts.push(InfoPosts)};
-    const ElectroPosts = news.filter(post => post.category==='electro');
+    const ElectroPosts = news.filter(post => post.category==='electronique');
     {ElectroPosts.length>0 && posts.push(ElectroPosts)};
-    const MecaPosts = news.filter(post => post.category==='meca');
+    const MecaPosts = news.filter(post => post.category==='mecanique');
     {MecaPosts.length>0 && posts.push(MecaPosts)};
 
     const [pageNumber, setPageNumber] = useState(0);

@@ -4,9 +4,12 @@ import PostArticles from '../Posts/postArticles';
 
 
 const NewsArticlesSidebar = props => {
+
+    const {news, com , Onclick} = props;
+
     return (
         <div className="col-lg-4 col-md-12">
-            <div className="news-sidebar">
+            <div className="newsArticles-sidebar">
                 <aside className="widget widget-search">
                     <h3 className="widget-title"><span>Search Objects</span></h3>
                     <form className="search-form" action="#" method="post">
@@ -15,7 +18,7 @@ const NewsArticlesSidebar = props => {
                     </form>
                 </aside>
 
-                <PostArticles news={props.news} com={props.com}/>
+                <PostArticles news={news} com={com} Link={Onclick}/>
 
                 <Category />
 

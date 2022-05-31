@@ -64,21 +64,21 @@ const getArticlesByDate = async (req, res, next) => {
    if (InfoArticles.length>0)
     {InfoArticles.map(article => {
     let   doc=article.toObject({ getters: true });
-    const ar={cat : 'info',...doc};
+    const ar={cat : 'informatique',...doc};
     RecentArticles = [...RecentArticles, ar]}
   )}
 
   if (ElectroArticles.length>0)
   {ElectroArticles.map(article => {
   let   doc=article.toObject({ getters: true });
-  const ar={cat : 'electro',...doc};
+  const ar={cat : 'electronique',...doc};
   RecentArticles = [...RecentArticles, ar]}
   )}
 
   if (MecaArticles.length>0)
   {MecaArticles.map(article => {
   let   doc=article.toObject({ getters: true });
-  const ar={cat : 'meca',...doc};
+  const ar={cat : 'mecanique',...doc};
   RecentArticles = [...RecentArticles, ar]}
   )}
 

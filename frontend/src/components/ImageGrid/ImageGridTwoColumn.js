@@ -1,16 +1,18 @@
 import React from 'react';
 
-const ImageGridTwoColumn = ({ images }) => {
+const ImageGridTwoColumn = props => {
+
+    const {image , description} = props;
     return (
         <div className="row">
             <div className="col-md-6">
                 <div className="folio-s-img">
-                    <img src={images[0]} alt="" />
+                    <img src={image} alt="" />
                 </div>
             </div>
             <div className="col-md-6">
                 <div className="folio-s-img">
-                    <img src={images[1]} alt="" />
+                    <p>{description}</p>
                 </div>
             </div>
         </div>

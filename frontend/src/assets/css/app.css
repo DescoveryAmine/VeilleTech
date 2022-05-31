@@ -3432,6 +3432,96 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 .quomodo-pagination a.prev:hover{
     color: #14212b;
 }
+/*articles side bar css*/
+
+.newsArticles-sidebar{
+    position: relative;
+    
+}
+.newsArticles-sidebar .widget{
+    position: relative;
+    margin: 0 40px 10px
+}
+
+.newsArticles-sidebar .widget .widget-title{
+    font-size: 18px;
+    line-height: .8;
+    letter-spacing: -.54px;
+    text-align: center;
+    margin: 0 0 30px;
+    position: relative;
+}
+
+.newsArticles-sidebar .widget .widget-title span{
+    display: inline-block;
+    position: relative;
+    padding: 0 51px;
+}
+.newsArticles-sidebar .widget .widget-title span:before{
+    position: absolute;
+    left: 0;
+    top: 7px;
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: #ff4a17;
+}
+.newsArticles-sidebar .widget .widget-title span:after{
+    position: absolute;
+    right: 0;
+    top: 7px;
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: #ff4a17;
+}
+
+.newsArticles-sidebar .widget ul li span{
+    color: #ff4a17;
+    float: right;
+}
+
+.articles-tr-post{
+    position: relative;
+    min-height: 80px;
+    padding-left: 08px;
+    padding-top: 3px;
+    margin-bottom: 20px;
+}
+
+.articles-tr-post:last-child{
+    margin-bottom: 0;
+}
+.articles-tr-post img{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.articles-tr-post h5{
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -.48px;
+    margin-bottom: 13px;
+}
+.articles-tr-post h5 a{
+    color: inherit;
+}
+.articles-tr-post h5 a:hover{
+    color: #ff4a17;
+}
+.articles-tr-post span{
+    display: block;
+    line-height: .8;
+    font-size: 14px;
+    color: #ff4a17;
+    margin: 0;
+}
+.articles-tr-post span i{
+    display: inline-block;
+    padding-right: 8px;
+}
 /*--- Sidebar Css ---*/
 .news-sidebar{
     position: relative;
@@ -3440,7 +3530,7 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 .news-sidebar .widget{
     position: relative;
     padding: 0 0 41px;
-    margin: 0 0 40px
+    margin: 0 40px 40px
 }
 .news-sidebar .widget:after{
     position: absolute;
@@ -3654,6 +3744,7 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 .news-deatil-area{
     position: relative;
     padding-right: 35px;
+    margin: 0 50px 0;
 }
 .news-deatil-area > p{
     color: #19274d;
