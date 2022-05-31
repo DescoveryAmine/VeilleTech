@@ -32,7 +32,7 @@ export const AfterLogmenus = (name) => {
             {
                 id: 11,
                 link: '/service',
-                linkText: 'Veille Interractive'
+                linkText: 'Costum Standby'
             },
             {
                 id: 12,
@@ -50,17 +50,17 @@ export const AfterLogmenus = (name) => {
             {
                 id: 13,
                 link: '/portfolio',
-                linkText: 'Evennement Scientifique',
+                linkText: 'Scientific Events',
             },
             {
                 id: 14,
                 link: '/single-portfolio',
-                linkText: 'Copération & Appel d\'offre',
+                linkText: 'Cooperations & Tenders',
             },
             {
                 id: 15,
                 link: '/Magazines',
-                linkText: 'Magazines de l\'actualités',
+                linkText: 'News magazines',
             },
         ]
     },
