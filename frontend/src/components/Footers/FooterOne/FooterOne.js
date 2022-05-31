@@ -33,27 +33,27 @@ const FooterOne = () => {
                     <div className="col-lg-3 col-md-6">
                         {/* <!-- Navigation Menu Start --> */}
                         <aside className="widget">
-                        <Link to="/"><h3 className="widget-title">About us</h3></Link>
+                        <Link to="/About"><h3 className="widget-title">About us</h3></Link>
                         </aside>
                         {/* <!-- Navigation Menu End --> */}
                     </div>
                     <div className="col-lg-3 col-md-6">
                         {/* <!-- Navigation Menu Start --> */}
                         <aside className="widget">
-                        <Link to="/"><h3 className="widget-title">Contact us</h3></Link>
+                        <Link to="/contact"><h3 className="widget-title">Contact us</h3></Link>
                         </aside>
                         {/* <!-- Navigation Menu End --> */}
                     </div>
                     <div className="col-lg-3 col-md-6">
                         {/* <!-- Navigation Menu Start --> */}
                         <aside className="widget">
-                        <Link to="/"><h3 className="widget-title">Help</h3></Link>
+                        <Link to="/contact"><h3 className="widget-title">Help</h3></Link>
                         </aside>
                         {/* <!-- Navigation Menu End --> */}
 
                         {/* <!-- Quote Btn Start --> */}
                         <aside className="widget">
-                            <Link className="quomodo-btn" to="/">Go to MDN WebSite <i className="fa fa-long-arrow-right"></i></Link>
+                            <a href='https://www.defense.tn/?lang=fr' className="quomodo-btn" >Go to MDN WebSite <i className="fa fa-long-arrow-right"></i></a>
                         </aside>
                         {/* <!-- Quote Btn  End --> */}
                     </div>
@@ -63,11 +63,10 @@ const FooterOne = () => {
                     <div className="col-lg-12">
                         <div className="copyright clearfix">
                             <ul>
-                                <li><Link to="/"><i className="fa fa-facebook-f"></i></Link></li>
-                                <li><Link to="/"><i className="fa fa-twitter"></i></Link></li>
-                                <li><Link to="/"><i className="fa fa-behance"></i></Link></li>
-                                <li><Link to="/"><i className="fa fa-youtube"></i></Link></li>
-                                <li><Link to="/"><i className="fa fa-linkedin"></i></Link></li>
+                                <li><a href='https://www.facebook.com/defense.tn'><i className="fa fa-facebook-f"></i></a></li>
+                            
+                                <li><a href='https://www.youtube.com/channel/UCfa9UDwDsHvcTw7MBBtNyIg'><i className="fa fa-youtube"></i></a></li>
+                                
                             </ul>
                             <p>crm@defense.tn</p>
                         </div>
