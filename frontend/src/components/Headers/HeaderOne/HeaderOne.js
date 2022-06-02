@@ -1,15 +1,29 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
 import MainMenu from '../../MainMenus/MainMenu';
 import Search from '../../Search/Search';
 import AuthModal from '../../Modal/AuthModal';
-import { AuthContext } from '../../../context/auth-context';
 import './HeaderOne.css';
 
 const HeaderOne = () => {
 
-    const auth = useContext(AuthContext);
+    const [name, setname] = useState(null);
+    const [role, setrole] = useState(null);
+
+    useEffect(()=>{
+        const storedData = window.localStorage.getItem('userData');
+        if(!!storedData)
+        {   
+            const data = JSON.parse(storedData)
+            setname(data.userName);
+            setrole(data.userRole);
+        }
+        else 
+        {
+            setname(null);
+            setrole(null);}
+    },[])
 
     const [showAuth, setShowAuth] = useState(false);
 
@@ -55,7 +69,7 @@ const HeaderOne = () => {
 
                             {/* <!-- Nav Menu Start --> */}
                             <div className={`collapse navbar-collapse ${showMobileMenu ? 'show' : ''}`} id="navbarNavDropdown">
-                                <MainMenu />
+                                <MainMenu Name={name} Role={role}/>
                             </div>
                             {/* <!-- Nav Menu End --> */}
 
@@ -65,7 +79,7 @@ const HeaderOne = () => {
 
                             {/* <!-- Appointment Btn --> */}
                             {/* <Link to="/auth" className="appoint-btn">Inscrire<i className="fa fa-long-arrow-right"></i></Link> */}
-                            <div style={{ display: !auth.isLoggedIn ? "inline-block" : "none" }} className="appoint-btn" onClick={openAuthHandler}>
+                            <div style={{ display: !name ? "inline-block" : "none" }} className="appoint-btn" onClick={openAuthHandler}>
                              Log in
                              <i className="fa fa-long-arrow-right"></i>
                             </div>

@@ -13,7 +13,7 @@ const signup = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
-  const { name, email, password } = req.body;
+  const { name, lastname, numcin, email, password } = req.body;
 
   let existingUser;
   try {
@@ -49,7 +49,10 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
+    lastname,
+    numcin,
     role: 'client',
+    isActive: false,
     password: hashedPassword,
   });
 
@@ -62,26 +65,35 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-  
-  let token;
 
-  try {
-    token = jwt.sign(
-      { userId: createdUser.id, userName: createdUser.name, email: createdUser.email },
-      'supersecret_dont_share',
-      { expiresIn: '120m' }
-    );
-  } catch (err) {
+  if (!createdUser.isActive) {
     const error = new HttpError(
-      'could not create session, please try again later.',
-      500
+      'still await for admin activation',
+      410
     );
     return next(error);
   }
 
-  res    
-  .status(201)
-  .json({ userId: createdUser.id, userName: name, email: createdUser.email, token: token });
+  else{
+    let token;
+
+    try {
+      token = jwt.sign(
+        { userId: existingUser.id, userName: existingUser.name, userRole: existingUser.role, email: existingUser.email, },
+        'supersecret_dont_share',
+        { expiresIn: '120m' }
+      );
+    } catch (err) {
+      const error = new HttpError(
+        'Logging in failed, please try again later.',
+        500
+      );
+      return next(error);
+    }
+    res    
+    .status(201)
+    .json({ userId: createdUser.id, userName: createdUser.name, userRole: createdUser.role, email: createdUser.email, token: token });
+  }
 };
 
 const login = async (req, res, next) => {
@@ -126,31 +138,42 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  let token;
-
-  try {
-    token = jwt.sign(
-      { userId: existingUser.id, userName: existingUser.name, email: existingUser.email, },
-      'supersecret_dont_share',
-      { expiresIn: '120m' }
-    );
-  } catch (err) {
+  if (!existingUser.isActive) {
     const error = new HttpError(
-      'Logging in failed, please try again later.',
-      500
+      'still await for admin activation',
+      410
     );
     return next(error);
   }
 
+  else{
+    let token;
+
+    try {
+      token = jwt.sign(
+        { userId: existingUser.id, userName: existingUser.name, userRole: existingUser.role, email: existingUser.email, },
+        'supersecret_dont_share',
+        { expiresIn: '120m' }
+      );
+    } catch (err) {
+      const error = new HttpError(
+        'Logging in failed, please try again later.',
+        500
+      );
+      return next(error);
+    }
+    res.json({
+      message: 'Logged in!',
+      userId: existingUser.id,
+      userName: existingUser.name,
+      userRole: existingUser.role,
+      email: existingUser.email,
+      token: token
+    });
+
+  }
 
 
-  res.json({
-    message: 'Logged in!',
-    userId: existingUser.id,
-    userName: existingUser.name,
-    email: existingUser.email,
-    token: token
-  });
 };
 
 exports.signup = signup;

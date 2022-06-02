@@ -1,8 +1,105 @@
 
-export const AfterLogmenus = (name) => {
+export const AfterLogmenus = (name,role) => {
 
 
-   const items=
+   const Citems=
+   [
+    {
+        id: 1,
+        linkText: 'News',
+        child: true,
+        icon: 'angle-down',
+        submenu: [
+            {
+                id: 8,
+                link: '/news/news-fields',
+                linkText: 'News Fields'
+            },
+            {
+                id: 9,
+                link: '/news/news-articles',
+                linkText: 'News Details'
+            },
+  
+        ]
+    },
+    {
+        id: 2,
+        linkText: 'E-services',
+        child: true,
+        icon: 'angle-down',
+        submenu: [
+            {
+                id: 10,
+                link: '/service',
+                linkText: 'Costum Standby'
+            },
+            {
+                id: 11,
+                link: '/single-service',
+                linkText: 'NewsLetters'
+            },
+        ]
+    },
+    {
+        id: 3,
+        linkText: 'E-bib',
+        child: true,
+        icon: 'angle-down',
+        submenu: [
+            {
+                id: 12,
+                link: '/portfolio',
+                linkText: 'Scientific Events',
+            },
+            {
+                id: 13,
+                link: '/single-portfolio',
+                linkText: 'Cooperations & Tenders',
+            },
+            {
+                id: 14,
+                link: '/Magazines',
+                linkText: 'News magazines',
+            },
+        ]
+    },
+    {
+        id: 4,
+        linkText: 'About',
+        link: '/about'
+    },
+    {
+        id: 5,
+        linkText: 'Contact',
+        link: '/contact'
+    },
+    {
+        id: 6,
+        linkText: null,
+        link: '/'
+    },
+    {
+      id: 7,
+      linkText:name,
+      child: true,
+      icon: 'angle-down',
+      submenu: [
+          {
+              id: 15,
+              link: '/user/current',
+              linkText: 'Home'
+          },
+          {
+              id: 16,
+              link: '/user/logout',
+              linkText: 'Logout'
+          },
+  
+      ]
+  }
+  ];
+  const Aitems=
    [
     {
         id: 1,
@@ -72,7 +169,7 @@ export const AfterLogmenus = (name) => {
         submenu: [
             {
                 id: 16,
-                link: '/assets/humains',
+                link: '/assets/users',
                 linkText: 'Humains'
             },
             {
@@ -118,6 +215,6 @@ export const AfterLogmenus = (name) => {
   }
   ]
 
-   return(items);
+   return((role ==='admin') ? Aitems : Citems);
 
     };

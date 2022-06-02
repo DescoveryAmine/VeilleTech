@@ -16,12 +16,15 @@ import {
 import { useHttpClient } from '../../hooks/http-hook';
 import { AuthContext } from '../../context/auth-context';
 import { useForm } from '../../hooks/form-hook';
+import { useHistory } from "react-router-dom";
 import './Auth.css';
 import Backdrop from './Backdrop';
 
 
 const ModalOverlay = props => {
 
+
+  let history = useHistory({forceRefresh:true});
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -43,7 +46,9 @@ const ModalOverlay = props => {
       setFormData(
         {
           ...formState.inputs,
-          name: undefined
+          name: undefined,
+          lastname : undefined,
+          numcin : undefined
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -52,6 +57,14 @@ const ModalOverlay = props => {
         {
           ...formState.inputs,
           name: {
+            value: '',
+            isValid: false
+          },
+          lastname: {
+            value: '',
+            isValid: false
+          },
+          numcin: {
             value: '',
             isValid: false
           }
@@ -79,9 +92,11 @@ const ModalOverlay = props => {
           }
         );
         const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp * 1000;
-        auth.login(responseData.userId, responseData.userName, responseData.token , expirationDate);
+        auth.login(responseData.userId, responseData.userName, responseData.userRole, responseData.token , expirationDate);
+        history.push("/");
+        history.go();
       } catch (err) {
-        toast.error(`${err} ! please tray again`);
+        toast.error(`${err} ! please try to login later`);
       }
     } else {
       try {
@@ -90,6 +105,8 @@ const ModalOverlay = props => {
           'POST',
           JSON.stringify({
             name: formState.inputs.name.value,
+            lastname: formState.inputs.lastname.value,
+            numcin: formState.inputs.numcin.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
           }),
@@ -98,10 +115,12 @@ const ModalOverlay = props => {
           }
         );
         const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp * 1000;
-        auth.login(responseData.userId, responseData.userName, responseData.token, expirationDate);
+        auth.login(responseData.userId, responseData.userName, responseData.userRole, responseData.token, expirationDate);
+        history.push("/");
+        history.go();
         setIsLoginMode(true);
       } catch (err) {
-        toast.error(`${error}`);
+        toast.error(`${err}! please try to login later`);
       }
     }
   };
@@ -122,6 +141,7 @@ const ModalOverlay = props => {
         <form onSubmit={authSubmitHandler}>
           <div className="form-inline">
           {!isLoginMode && (
+            <>
             <Input
               element="input"
               id="name"
@@ -131,6 +151,25 @@ const ModalOverlay = props => {
               errorText="Please enter a name."
               onInput={inputHandler}
             />
+            <Input
+            element="input"
+            id="lastname"
+            type="text"
+            label="Your LastName"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a last name."
+            onInput={inputHandler}
+          />
+          <Input
+            element="input"
+            id="numcin"
+            type="text"
+            label="Your cin number"
+            validators={[VALIDATOR_MINLENGTH(8)]}
+            errorText="Please enter your cin number."
+            onInput={inputHandler}
+          />
+          </>
           )}
           <Input
             element="input"

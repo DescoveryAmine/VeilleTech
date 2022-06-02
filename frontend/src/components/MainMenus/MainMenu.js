@@ -1,19 +1,23 @@
 import { AuthContext } from '../../context/auth-context';
-import { useState, useContext, useEffect} from 'react';
+import { useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import PostLogmenus from './PostLogMenu';
 const afterLogmenus = require ('./AfterLogMenu');
 
-const MainMenu = () => {
+const MainMenu = props => {
     
-    
-    const auth = useContext(AuthContext);
-    let Menus;
-    const afLogmenus = afterLogmenus.AfterLogmenus(auth.userName);
+    const{Name, Role} = props;
+    let menu;
 
-    if   (auth.isLoggedIn) {
-          Menus = afLogmenus}
-    else {Menus = PostLogmenus}
+        if(!!Name)
+        {  
+        const afLogmenus = afterLogmenus.AfterLogmenus(Name,Role);
+        menu = afLogmenus;
+        }
+        else 
+        {menu = PostLogmenus}
+
+
 
     const [showMobileSubmenu, setShowMobileSubmenu] = useState(0);
     const handleShowHideOnMobileMenu = (id) => {
@@ -28,7 +32,7 @@ const MainMenu = () => {
     return (
         <ul className="navbar-nav">
 
-            {Menus.length > 0 ? Menus.map((item, i) => (
+            {menu.length > 0 ? menu.map((item, i) => (
                 <li key={i}
                     onClick={() => handleShowHideOnMobileMenu(item?.id)}
                     className={`${item.child ? 'dropdown' : ''} nav-item`}>

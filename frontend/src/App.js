@@ -7,18 +7,19 @@ import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
 import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 
+
 //ok
 
 
 
 function App() {
 
-  const { token, login, logout, userId, userName } = useAuth();
+  const { token, login, logout, userId, userName, userRole } = useAuth();
 
 
   let routes;
 
-  if (!!token) {
+  if (1) {
     routes = (
       <Switch>
       {
@@ -65,6 +66,7 @@ function App() {
       isLoggedIn: !!token,
       userId: userId,
       userName : userName,
+      userRole : userRole,
       token: token,
       login: login,
       logout: logout

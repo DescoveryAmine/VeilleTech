@@ -12,6 +12,10 @@ router.post(
     check('name')
       .not()
       .isEmpty(),
+    check('lastname')
+      .not()
+      .isEmpty(),
+    check('numcin').isLength({ min: 8 }),
     check('email')
       .normalizeEmail()
       .isEmail(),

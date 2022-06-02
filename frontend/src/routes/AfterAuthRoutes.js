@@ -10,6 +10,8 @@ const NewsArticles = lazy(() => import('../pages/NewsArticles.page'));
 const About = lazy(() => import('../pages/About.page'));
 const Contact = lazy(() => import('../pages/Contact.page'));
 const Current = lazy(() => import('../pages/Current.page'));
+const Users = lazy(() => import('../pages/Users.page'));
+const Materials = lazy(() => import('../pages/Materials.page'));
 const Logout = lazy(() => import('../pages/Logout.page'));
 const NotFound = lazy(() => import('../pages/Page404.page'));
 
@@ -70,6 +72,23 @@ const AfterAuthroutes = [
         authentication: false,
         theme: "theme-1"
     },
+    {
+        name: 'Humains',
+        path: '/assets/users',
+        exact: true,
+        component: Users,
+        authentication: false,
+        theme: "theme-1"
+    },
+    {
+        name: 'Materials',
+        path: '/assets/materials',
+        exact: true,
+        component: Materials,
+        authentication: false,
+        theme: "theme-1"
+    }
+    ,
     {
         name: 'About',
         path: '/about',

@@ -11,6 +11,7 @@ const newsRoutes = require('./routes/si-routes');
 const newsFieldsRoutes = require('./routes/news/fields-routes');
 const newsArticlesRoutes = require('./routes/news/articles-routes');
 const usersRoutes = require('./routes/users-routes');
+const humansRoutes = require('./routes/assets/humans-routes');
 const HttpError = require('./models/http-error');
 const InfoCollection = require('./models/informatique');
 const ElectroCollection = require('./models/electronique');
@@ -45,6 +46,7 @@ app.use('/api/news', newsRoutes);
 app.use('/api/news/news-fields', newsFieldsRoutes);
 app.use('/api/news/news-articles', newsArticlesRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/assets/humans', humansRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
@@ -76,7 +78,7 @@ const fetchNews = (URL,Schema,imgSrc) =>{
 };
 
 mongoose
-  .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true})
+  .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false})
   .then(() => {
     fetchNews(mecaurls,MecaCollection,mecaImg);
     fetchNews(infourls,InfoCollection,infoImg);
