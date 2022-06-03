@@ -80,9 +80,10 @@ const fetchNews = (URL,Schema,imgSrc) =>{
 mongoose
   .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false})
   .then(() => {
-    fetchNews(mecaurls,MecaCollection,mecaImg);
-    fetchNews(infourls,InfoCollection,infoImg);
-    fetchNews(elctrourls,ElectroCollection,electroImg);
+    console.log('dev mode plz uncomment this section')
+    // fetchNews(mecaurls,MecaCollection,mecaImg);
+    // fetchNews(infourls,InfoCollection,infoImg);
+    // fetchNews(elctrourls,ElectroCollection,electroImg);
   
   app.listen(5000);
   console.log("server running on 5000");

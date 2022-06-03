@@ -48,7 +48,8 @@ const ModalOverlay = props => {
           ...formState.inputs,
           name: undefined,
           lastname : undefined,
-          numcin : undefined
+          numcin : undefined,
+          age : undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -65,6 +66,10 @@ const ModalOverlay = props => {
             isValid: false
           },
           numcin: {
+            value: '',
+            isValid: false
+          },
+          age: {
             value: '',
             isValid: false
           }
@@ -107,7 +112,8 @@ const ModalOverlay = props => {
             name: formState.inputs.name.value,
             lastname: formState.inputs.lastname.value,
             numcin: formState.inputs.numcin.value,
-            email: formState.inputs.email.value,
+            age: formState.inputs.numcin.value,
+            email: formState.inputs.age.value,
             password: formState.inputs.password.value
           }),
           {
@@ -167,6 +173,15 @@ const ModalOverlay = props => {
             label="Your cin number"
             validators={[VALIDATOR_MINLENGTH(8)]}
             errorText="Please enter your cin number."
+            onInput={inputHandler}
+          />
+            <Input
+            element="input"
+            id="age"
+            type="text"
+            label="Your age plz"
+            validators={[VALIDATOR_MINLENGTH(2)]}
+            errorText="Please enter your age."
             onInput={inputHandler}
           />
           </>

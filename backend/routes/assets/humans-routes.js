@@ -5,7 +5,7 @@ const humansController = require('../../controllers/humans-controllers');
 const router = express.Router();
 
 
-router.get('/all',humansController.findInactive);
+router.get('/all',humansController.findall);
 
 router.post('/activate',humansController.activate);
 
