@@ -1,4 +1,4 @@
-import { Suspense, useState, useCallback  } from "react";
+import { Suspense, useState, useEffect  } from "react";
 import { BrowserRouter as Router, Switch} from "react-router-dom";
 import PostAuthroutes from "./routes/PostAuthRoutes";
 import AfterAuthroutes from "./routes/AfterAuthRoutes";
@@ -15,11 +15,27 @@ import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 function App() {
 
   const { token, login, logout, userId, userName, userRole } = useAuth();
+  const [sToken, setToken] = useState(null);
+
+  useEffect(()=>{
+      const storedData = window.localStorage.getItem('userData');
+      if(!!storedData)
+      {   
+          const data = JSON.parse(storedData)
+          setToken(data.token);
+      }
+      else 
+      {
+        setToken(null);
+      }
+  },[])
+
+
 
 
   let routes;
 
-  if (1) {
+  if (!!sToken) {
     routes = (
       <Switch>
       {

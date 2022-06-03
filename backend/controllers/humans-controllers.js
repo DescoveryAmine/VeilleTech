@@ -35,6 +35,7 @@ const fetchallInfo = (callback) => {
     })
     .catch(e => {
       console.log(e);
+      return callback([]);
     })
     .finally(() => {
       session.close();
@@ -71,6 +72,7 @@ const activateUser = (mail,callback) => {
     })
     .catch(e => {
       console.log(e);
+      return callback([]);
     })
     .finally(() => {
       session.close();
@@ -107,6 +109,7 @@ const rejectUser = (mail,callback) => {
     })
     .catch(e => {
       console.log(e);
+      return callback([]);
     })
     .finally(() => {
       session.close();
@@ -138,6 +141,7 @@ const removeUser = (mail,callback) => {
     })
     .catch(e => {
       console.log(e);
+      return callback(0);
     })
     .finally(() => {
       session.close();
@@ -152,7 +156,7 @@ const findall = async (req, res, next) => {
 
     if (!users || users.length === 0 ) {
       return next(
-        new HttpError('there is no users in database', 404)
+        new HttpError('data base error ', 404)
       );
     }
 

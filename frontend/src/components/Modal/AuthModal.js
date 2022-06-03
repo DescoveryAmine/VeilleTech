@@ -101,7 +101,7 @@ const ModalOverlay = props => {
         history.push("/");
         history.go();
       } catch (err) {
-        toast.error(`${err} ! please try to login later`);
+        toast.error(`${err}`);
       }
     } else {
       try {
@@ -112,21 +112,17 @@ const ModalOverlay = props => {
             name: formState.inputs.name.value,
             lastname: formState.inputs.lastname.value,
             numcin: formState.inputs.numcin.value,
-            age: formState.inputs.numcin.value,
-            email: formState.inputs.age.value,
+            age: formState.inputs.age.value,
+            email: formState.inputs.email.value,
             password: formState.inputs.password.value
           }),
           {
             'Content-Type': 'application/json'
           }
         );
-        const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp * 1000;
-        auth.login(responseData.userId, responseData.userName, responseData.userRole, responseData.token, expirationDate);
-        history.push("/");
-        history.go();
         setIsLoginMode(true);
       } catch (err) {
-        toast.error(`${err}! please try to login later`);
+        toast.error(`${err}`);
       }
     }
   };

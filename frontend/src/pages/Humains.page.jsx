@@ -9,7 +9,7 @@ import UsersTable from "../components/Assets/Humans/userTable";
 import MoveTop from '../components/MoveTop/MoveTop';
 
 
-const Users = () => {
+const Humains = () => {
 
   
 
@@ -38,7 +38,7 @@ const Users = () => {
           isActive: user.isActive
           }])));
       } catch (err) {
-        toast.error(`${error} ! please tray again`);
+        toast.error(`${err} ! please tray again`);
         clearError();
       }
     };
@@ -83,7 +83,7 @@ const Users = () => {
                                     {/* tenders area  */}
           </div>
             {/* Move to top Section  */}
-            <MoveTop path="/" />
+            <MoveTop path="/assets/users" />
 
         </section>
 
@@ -96,4 +96,4 @@ const Users = () => {
 
 
 
-  export default Users;
+  export default Humains;
