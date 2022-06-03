@@ -27,6 +27,7 @@ const Users = () => {
         const responseData = await sendRequest(
           `http://localhost:5000/api/assets/humans/all/`
         );
+        console.log(responseData.assets);
          responseData.assets.map((user) => ( setUsers(U => [...U,
           {
           id: user.userId,
