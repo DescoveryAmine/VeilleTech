@@ -1,6 +1,4 @@
-
 export const AfterLogmenus = (name,role) => {
-
 
    const Citems=
    [
@@ -17,7 +15,7 @@ export const AfterLogmenus = (name,role) => {
             },
             {
                 id: 9,
-                link: '/news/news-articles',
+                link: '/news/news-articles/',
                 linkText: 'News Details'
             },
   
@@ -114,7 +112,7 @@ export const AfterLogmenus = (name,role) => {
             },
             {
                 id: 10,
-                link: '/news/news-articles',
+                link: '/news/news-articles/',
                 linkText: 'News Details'
             },
   

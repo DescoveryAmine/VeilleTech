@@ -20,7 +20,7 @@ const Service = () => {
             <Pricing />
 
             {/* Move to top Section  */}
-            <MoveTop path="/service" />
+            <MoveTop/>
         </>
     );
 };

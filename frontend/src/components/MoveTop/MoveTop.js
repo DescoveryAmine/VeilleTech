@@ -10,7 +10,7 @@ const MoveTop = props => {
     }
 
     return (
-        <Link onClick={handleButtonClicked} to={props.path} id="back-to-top" style={{ opacity: '1', visibility: 'visible' }}>
+        <Link onClick={handleButtonClicked} id="back-to-top" style={{ opacity: '1', visibility: 'visible' }}>
             <i className="fa fa-angle-up"></i>
         </Link>
     );

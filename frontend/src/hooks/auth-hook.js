@@ -17,8 +17,7 @@ export const useAuth = () => {
     setUserName(name);
     setUserRole(role);
     setToken(token);
-    const tokenExpDate = expirationDate;
-    setTokenExpirationDate(tokenExpDate);
+    setTokenExpirationDate(expirationDate);
     localStorage.setItem(
       'userData',
       JSON.stringify({
@@ -26,7 +25,10 @@ export const useAuth = () => {
         userName: name,
         userRole: role,
         token: token,
-        expiration: tokenExpirationDate
+        expiration: expirationDate,
+        info:0,
+        electro:0,
+        meca:0
       })
     );
   }, []);
@@ -60,5 +62,5 @@ export const useAuth = () => {
     }
   }, [login]);
 
-  return { token, login, logout, userId, userName, userRole };
+  return { token,tokenExpirationDate, login, logout, userId, userName, userRole };
 };

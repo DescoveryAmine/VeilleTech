@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useHttpClient } from '../hooks/http-hook';
@@ -11,14 +12,10 @@ import MoveTop from '../components/MoveTop/MoveTop';
 
 const SingleNews = () => {
 
-    const [News, setNews]= useState([]);
-    const [Post, setPost]= useState({});
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    
-    const handelPost = ()=>{
-        setPost({title:'looooooooooooooool'});
+    const articleId=useParams().postId;
 
-    }
+    const [News, setNews]= useState([]);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
     useEffect(() => {
       const fetchArticles = async () => {
@@ -40,6 +37,10 @@ const SingleNews = () => {
             Comments : article.comments,
             date: article?.pubDate[0].split(/[-' ']+/).slice(0,2)
             }])));
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+          })
         } catch (err) {
           toast.error(`${error} ! please tray again`);
           clearError();
@@ -61,16 +62,16 @@ const SingleNews = () => {
                     <div className="row">
 
                         {/* Single Article  */}
-                        <Article news = {News} com='0'/>
+                        <Article news = {News} postid={articleId}com='0'/>
 
                         {/* Sidebar area  */}
-                        <ArticlesSidebar news = {News} com='0'/>
+                        <ArticlesSidebar news = {News}  com='0'/>
 
                     </div>
             </section>
 
             {/* Move to top Section  */}
-            <MoveTop path="/single-news" />
+            <MoveTop/>
         </>
     );
 };

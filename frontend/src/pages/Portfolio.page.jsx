@@ -21,7 +21,7 @@ const Portfolio = () => {
             <Team />
 
             {/* Move to top Section  */}
-            <MoveTop path="/portfolio" />
+            <MoveTop/>
 
         </>
     );

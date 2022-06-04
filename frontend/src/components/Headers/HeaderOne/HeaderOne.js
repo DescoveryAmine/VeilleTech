@@ -15,9 +15,14 @@ const HeaderOne = () => {
         const storedData = window.localStorage.getItem('userData');
         if(!!storedData)
         {   
+
             const data = JSON.parse(storedData)
+            if(new Date(data.expiration) > new Date())
+            {
             setname(data.userName);
             setrole(data.userRole);
+            }
+
         }
         else 
         {

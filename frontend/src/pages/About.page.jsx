@@ -17,7 +17,7 @@ const About = () => {
             <PortfolioOne /> 
             
             {/* Move to top Section  */}
-            <MoveTop path="/about" />
+            <MoveTop/>
 
         </>
     );

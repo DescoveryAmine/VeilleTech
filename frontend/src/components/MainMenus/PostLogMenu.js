@@ -12,7 +12,7 @@ const PostLogmenus = [
           },
           {
               id: 5,
-              link: '/news/news-articles',
+              link: '/news/news-articles/',
               linkText: 'News Details'
           },
 

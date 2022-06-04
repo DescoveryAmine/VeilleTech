@@ -56,7 +56,7 @@ const NewsFields = () => {
                     </div>
             </section>
             {/* Move to top Section  */}
-            <MoveTop path="/news" />
+            <MoveTop/>
         </>
     );
 };

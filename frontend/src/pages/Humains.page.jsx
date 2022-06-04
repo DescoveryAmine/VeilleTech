@@ -83,7 +83,7 @@ const Humains = () => {
                                     {/* tenders area  */}
           </div>
             {/* Move to top Section  */}
-            <MoveTop path="/assets/users" />
+            <MoveTop/>
 
         </section>
 

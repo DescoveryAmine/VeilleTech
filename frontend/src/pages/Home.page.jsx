@@ -97,7 +97,7 @@ const Home = () => {
             <CallToActionTwo />
 
             {/* Move to top Section  */}
-            <MoveTop path="/" />
+            <MoveTop/>
         </>
     );
 };

@@ -31,7 +31,7 @@ const pricings = [
         price: 10,
         description: 'Receve our Recent Mgazine ',
         features: [
-            'MDN Magazine', 'Scientifique Magazine', 'Scientifique Article','practical Manuscripts'
+            'News', 'Scientifique Magazine', 'Scientifique Article','practical Manuscripts'
         ],
         buttonText: 'Purchase Now',
         buttonLink: '/',

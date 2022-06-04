@@ -22,7 +22,7 @@ const SinglePortfolio = () => {
             <PortfolioContent portfolio={portfolio} />
 
             {/* Move to top Section  */}
-            <MoveTop path="/single-portfolio" />
+            <MoveTop/>
 
         </>
     );

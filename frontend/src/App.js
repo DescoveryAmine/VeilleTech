@@ -14,15 +14,23 @@ import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 
 function App() {
 
-  const { token, login, logout, userId, userName, userRole } = useAuth();
+  const { token,tokenExpirationDate, login, logout, userId, userName, userRole } = useAuth();
   const [sToken, setToken] = useState(null);
 
   useEffect(()=>{
       const storedData = window.localStorage.getItem('userData');
       if(!!storedData)
       {   
-          const data = JSON.parse(storedData)
+        const data = JSON.parse(storedData)
+        if(new Date(data.expiration) > new Date())
+          {
           setToken(data.token);
+          }
+        else
+          {
+          localStorage.removeItem('userData');
+          }
+
       }
       else 
       {
@@ -84,6 +92,7 @@ function App() {
       userName : userName,
       userRole : userRole,
       token: token,
+      tokenExpirationDate:tokenExpirationDate,
       login: login,
       logout: logout
     }}

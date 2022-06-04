@@ -5,7 +5,7 @@ import PostArticles from '../Posts/postArticles';
 
 const NewsArticlesSidebar = props => {
 
-    const {news, com , Onclick} = props;
+    const {news, com } = props;
 
     return (
         <div className="col-lg-4 col-md-12">
@@ -18,7 +18,7 @@ const NewsArticlesSidebar = props => {
                     </form>
                 </aside>
 
-                <PostArticles news={news} com={com} Link={Onclick}/>
+                <PostArticles news={news} com={com}/>
 
                 <Category />
 

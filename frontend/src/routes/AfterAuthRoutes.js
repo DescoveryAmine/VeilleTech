@@ -66,7 +66,15 @@ const AfterAuthroutes = [
     },
     {
         name: 'News Articles',
-        path: '/news/news-articles',
+        path: '/news/news-articles/:postId',
+        exact: true,
+        component: NewsArticles,
+        authentication: false,
+        theme: "theme-1"
+    },
+    {
+        name: 'News Articles',
+        path: '/news/news-articles/',
         exact: true,
         component: NewsArticles,
         authentication: false,

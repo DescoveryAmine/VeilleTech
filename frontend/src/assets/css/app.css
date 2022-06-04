@@ -3440,7 +3440,13 @@ footer.f3-color .call-to-action .cta-item.right h4 {
 }
 .newsArticles-sidebar .widget{
     position: relative;
-    margin: 0 40px 10px
+    margin: 0 40px 10px;
+}
+
+.newsArticles-sidebar .widget-trend-post{
+    position: relative;
+    height: 35rem;
+    overflow-y: scroll;
 }
 
 .newsArticles-sidebar .widget .widget-title{

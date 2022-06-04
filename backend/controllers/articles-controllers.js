@@ -77,6 +77,46 @@ const getArticles = async (req, res, next) => {
   res.json({ articles: RecentArticles});
 };
 
+const updateArticlesById = async (req, res, next) => {
+
+  const {postId, postCat} = req.body;
+  
+  let schema;
+
+  switch (postCat) {
+    case 'informatique':
+      schema=Infos;
+      break;
+    case 'electronique':
+      schema=Electro;
+      break;
+    case 'mecanique':
+      schema=Meca;
+      break;
+    default:
+      console.log(`Sorry, we are out of range`);
+  }
+  const filter = { _id: postId };
+  const update = { $inc: { views: 1 }};
+  try {
+    apdated = await schema.findOneAndUpdate(filter, update, {
+      new: true
+    });
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching some articles failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+  if (!apdated || apdated.length===0) {
+    return next(
+      new HttpError('Could not apdate articles', 404)
+    );
+  }
+  res.json('apdate ok!');
+}
+
 const getArticlesByUserId = async (req, res, next) => {
 
   const userId = req.params.uid;
@@ -105,4 +145,5 @@ const getArticlesByUserId = async (req, res, next) => {
 
 exports.getArticles = getArticles;
 exports.getArticlesByUserId = getArticlesByUserId;
+exports.updateArticlesById = updateArticlesById;
 

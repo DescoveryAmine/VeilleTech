@@ -12,18 +12,16 @@ import MoveTop from '../components/MoveTop/MoveTop';
 const gridImages = [GridImageOne, GridImageTwo, GridImageThree];
 
 const service = {
-    title: 'Expert IT Services For The Cloud Service',
+    title: 'Expert solution For newsletter Services',
     description: `
         <p>
             <span>M</span>ost managed services firms offer only outsourcing or project management support. What makes our Managed Solutions different
-            is that we provide teams that combine highly regarded consulting solutions and technologies with a vast network of experienced
-            operational talent to implement those solutions.
+            is that we provide costum newsletter that combine highly regarded consulting solutions and technologies with a vast network of experienced tools in delevring your best attention.
         </p>
         <p>
-            Humans have been storing, retrieving, manipulating, and communicating information since the Sumerians in Mesopotamia developed writing in about 3000 BC,[3] but the term information technology in its modern sense first appeared in a 1958 article published in the Harvard Business Review; authors Harold J. Leavitt and Thomas L. Whisler commented that "the new technology does not yet have a single established name. We shall call it information technology (IT)." Their definition consists of three categories: techniques for processing, the application of statistical and mathematical methods to decision-making, and the simulation of higher-order thinking through computer programs.
-        </p>
-        <p>
-            Electronic computers, using either relays or valves, began to appear in the early 1940s. The electromechanical Zuse Z3, completed in 1941, was the world's first programmable computer, and by modern standards one of the first machines that could be considered a complete computing machine. Colossus, developed during the Second World War to decrypt German messages, was the first electronic digital computer. Although it was programmable, it was not general-purpose, being designed to perform only a single task. It also lacked the ability to store its program in memory; programming was carried out using plugs and switches to alter the internal wiring.[10] The first recognisably modern electronic digital stored-program computer was the Manchester Baby, which ran its first program on 21 June 1948. Electronic computers, using either relays or valves, began to appear in the early 1940s. The electromechanical Zuse Z3, completed in 1941, was the world's first programmable computer, and by modern standards one of the first machines that could be considered a complete computing machine. Colossus, developed during the Second World War to decrypt German messages, was the first electronic digital computer. Although it was programmable, it was not general-purpose, being designed to perform only a single task. It also lacked the ability to store its program in memory; programming.
+        A newsletter is a printed or electronic report containing news concerning the activities of a business or an organization that is sent to its members, customers, employees or other subscribers. Newsletters generally contain one main topic of interest to its recipients. A newsletter may be considered grey literature. E-newsletters are delivered electronically via e-mail and can be viewed as spamming if e-mail marketing is sent unsolicited.
+
+        The newsletter is the most common form of serial publication.[5] About two-thirds of newsletters are internal publications, aimed towards employees and volunteers, while about one-third are external publications, aimed towards advocacy or special interest groups
         </p>
     `,
     image: singleServiceImage
@@ -33,13 +31,13 @@ const SingleService = () => {
     return (
         <>
             {/* Page Banner section  */}
-            <BannerTwo pageTitle="Service Details" title="Digital Consultancy" />
+            <BannerTwo pageTitle="Service Details" title="Digital news" />
 
             {/* Single Service Details section  */}
             <SingleServiceContent singleDetails={service} />
 
             {/* Platform section  */}
-            <Platform />
+            {/* <Platform /> */}
 
             {/* Grid Image section  */}
             <ImageGrid images={gridImages} />
@@ -48,10 +46,10 @@ const SingleService = () => {
             <Pricing />
 
             {/* Call To Action Section  */}
-            <CallToActionThree />
+            {/* <CallToActionThree /> */}
 
             {/* Move to top Section  */}
-            <MoveTop path="/single-service" />
+            <MoveTop/>
 
         </>
     );

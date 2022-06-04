@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
 import ThemeSlider from '../Sliders/ThemeSlider/ThemeSlider';
@@ -7,6 +8,7 @@ import Video from '../Video/Video';
 
 
 const NewsContent = props => {
+  
     
     const {news, postsPerPage, paginated} = props;
     const [pageNumber, setPageNumber] = useState(0);
@@ -43,7 +45,7 @@ const NewsContent = props => {
                             </div>
                             <div className="news-details">
                                 <h3>
-                                    <Link to={singleNews.link}>{singleNews.title}</Link>
+                                    <Link to={`/news/news-articles/${singleNews.id}`}>{singleNews.title}</Link>
                                 </h3>
                                 <div className="news-footer">
                                     <span><i className="fa fa-eye"></i>{singleNews.views} Views</span>

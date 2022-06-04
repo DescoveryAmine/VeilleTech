@@ -48,7 +48,7 @@ const Contact = () => {
             </section>
 
             {/* Move to top Section  */}
-            <MoveTop path="/contact" />
+            <MoveTop/>
         </>
     );
 };
