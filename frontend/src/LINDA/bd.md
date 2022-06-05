@@ -1,4 +1,7 @@
 CREATE 
+(info:DOMAINE{domaine_id:1, titre:"informatique"}),
+(electro:DOMAINE{domaine_id:2, titre:"electronique"}),
+(meca:DOMAINE{domaine_id:3, titre:"mecanique"}),
 (ines:UTILISATEUR{numcin:12845582, lastname:"bouker", name:"ines", email:"inesbouker@gmail.com", age: 23, role:"client", isActive:false}),
 (ahmed:UTILISATEUR{numcin:13456789, lastname:"sallemi", name:"ahmed", email:"ahmedsallemi@gmail.com", age: 30, role:"client", isActive:false}),
 (aymen:UTILISATEUR{numcin:13264597, lastname:"slama", name:"aymen", email:"aymenslama@gmail.com", age: 42, role:"client", isActive:false}),
