@@ -97,7 +97,7 @@ const ModalOverlay = props => {
           }
         );
         const expirationDate = JSON.parse(Buffer.from(responseData.token.split('.')[1], 'base64').toString()).exp*1000;
-        auth.login(responseData.userId, responseData.userName, responseData.userRole, responseData.token , expirationDate);
+        auth.login(responseData.userId, responseData.userName, responseData.userRole, responseData.token , expirationDate,responseData.userInterrest);
         history.push("/");
         history.go();
       } catch (err) {

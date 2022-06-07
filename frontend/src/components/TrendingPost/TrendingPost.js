@@ -1,13 +1,23 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
 const TrendingPost = props => {
 
+
     const {news, com} = props;
     let posts =[];
-    const TrendPosts = news.filter(post => post.views>3);
-    if(TrendPosts.length>0)
-    {posts = TrendPosts.slice(0,TrendPosts.length)} 
+    const[maxTrend, setMaxTrend] = useState(0);
+    useEffect(()=>{
+        setMaxTrend(prev=>Math.max(...news.map(post => post.views)));
+
+    },[news])
+    
+    if(maxTrend>0)
+    {   
+        const TrendPosts = news.filter(post => post.views>maxTrend-1);
+        posts = TrendPosts.slice(0,TrendPosts.length);
+    } 
     return (
         <aside className="widget widget-trend-post">
             <h3 className="widget-title"><span>Trend News</span></h3>

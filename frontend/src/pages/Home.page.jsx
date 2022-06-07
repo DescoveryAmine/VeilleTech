@@ -14,15 +14,38 @@ import BannerOne from '../components/Banners/BannerOne/BannerOne';
 import MoveTop from '../components/MoveTop/MoveTop';
 
 
+
 const Home = () => {
 
     const [News, setNews]= useState([]);
+    const [Int, setInt]= useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     
     //Use id client in Inettractive mode
     //const userId = useParams().userId;
     // ne pas oublier  de chabger les paramettres de useEffect [sendRequest, userId]);
-  
+    useEffect(()=>{
+
+      const storedData = window.localStorage.getItem('userData');
+      if(!!storedData)
+      {   
+        const data = JSON.parse(storedData)
+        if(new Date(data.expiration) > new Date())
+          {
+          setInt(data.userFint);
+          }
+        else
+          {
+            
+            setInt('Natural');
+          }
+
+      }
+      else 
+      {
+        setInt('Natural');
+      }
+  },[])
 
     useEffect(() => {
       const fetchArticles = async () => {
@@ -63,7 +86,7 @@ const Home = () => {
                     <div className="row">
                     <div className="col-lg-8 col-md-12">
                        {/* Blog Section  */}
-                       <NewsFields news={News} com ='0'/>
+                       <NewsFields news={News} com ={Int}/>
 
                     </div>
                         {/* Sidebar area  */}

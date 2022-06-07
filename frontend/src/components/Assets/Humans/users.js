@@ -75,6 +75,8 @@ const Users = ({u}) => {
     };
 
   return (
+    <>
+    <ToastContainer/>
     <tbody>
       <tr>
         <td>{u.name}</td>
@@ -99,6 +101,7 @@ const Users = ({u}) => {
           </td>
       </tr>
     </tbody>
+    </>
   );
 };
 

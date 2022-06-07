@@ -24,6 +24,26 @@ router.post(
   usersController.signup
 );
 
+router.post(
+  '/logout',
+  [
+    check('userID')
+      .not()
+      .isEmpty(),
+    check('Info')
+      .not()
+      .isEmpty(),
+    check('Electro')
+      .not()
+      .isEmpty(),
+    check('Meca')
+      .not()
+      .isEmpty(),
+
+  ],
+  usersController.logout
+);
+
 router.post('/login', usersController.login);
 
 module.exports = router;

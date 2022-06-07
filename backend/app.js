@@ -16,6 +16,10 @@ const HttpError = require('./models/http-error');
 const InfoCollection = require('./models/informatique');
 const ElectroCollection = require('./models/electronique');
 const MecaCollection = require('./models/mecanique');
+const neo4j = require ('neo4j-driver');
+const REACT_APP_NEO4J_URI = require('./config/keys').NEO4J_URI;
+const REACT_APP_NEO4J_USER = require('./config/keys').NEO4J_USER;
+const REACT_APP_NEO4J_PASSWORD = require('./config/keys').NEO4J_PASSWORD;
 
 const app = express();
 
@@ -77,10 +81,96 @@ const fetchNews = (URL,Schema,imgSrc) =>{
 })
 };
 
+const rebuildcommunities = async ()=>{
+
+  const driver = neo4j.driver(
+    REACT_APP_NEO4J_URI,
+    neo4j.auth.basic(
+        REACT_APP_NEO4J_USER,
+        REACT_APP_NEO4J_PASSWORD
+    )
+  )
+  console.log("CALLING recycle communities");
+  const session = driver.session();
+  const tx = session.beginTransaction();
+  {
+
+    tx
+    .run(`CALL gds.graph.project(
+      'myGraph',                    
+      ['UTILISATEUR','Domain'],                             
+      {Link: {orientation: 'UNDIRECTED',properties:'weight'}})
+      YIELD
+      graphName AS graph,
+      relationshipProjection AS knowsProjection,
+      nodeCount AS nodes,
+      relationshipCount AS rels;`);
+      tx
+      .run(`CALL apoc.periodic.iterate(
+        "MATCH (s) WHERE (s:UTILISATEUR) OR s:Domain RETURN s",
+        "CALL gds.allShortestPaths.dijkstra.write('myGraph', {
+        searchDeph : 1,
+        sourceNode: s,
+        relationshipWeightProperty: 'weight',
+        writeRelationshipType: 'HyperEdge',
+        writeNodeIds: true})
+        YIELD relationshipsWritten
+        RETURN relationshipsWritten",
+        {batchMode: 'SINGLE', parallel: false});`);      
+        tx
+        .run(`CALL gds.graph.project(
+          'myEdgeGraph',
+          'UTILISATEUR',
+          'HyperEdge',
+          {relationshipProperties: 'totalCost'});`);
+        tx
+        .run(`CALL apoc.periodic.iterate(
+          "MATCH (s:UTILISATEUR) RETURN s",
+          "CALL gds.allShortestPaths.hyper.write('myEdgeGraph', {
+          searchDeph : 2,
+          sourceNode: s,
+          relationshipWeightProperty: 'totalCost',
+          writeRelationshipType: 'HyperPath',
+          writeNodeIds: true})
+          YIELD relationshipsWritten
+          RETURN relationshipsWritten",
+          {batchMode: 'SINGLE', parallel: false});`);
+        tx
+        .run(`CALL gds.graph.project(
+          'myHyperGraph',
+          'UTILISATEUR',
+          {
+            HyperPath: {
+              orientation: 'NATURAL',
+              properties: ['totalCost']
+            }});`);
+          tx
+          .run(`CALL gds.louvain.write('myHyperGraph', { writeProperty: 'Hypercommunity' })
+          YIELD 
+          communityCount, modularity, modularities;`);
+          tx
+          .run(`MATCH ()-[r:HyperEdge]->()
+          DELETE r;`);
+          tx
+          .run(`MATCH ()-[r:HyperPath]->()
+          DELETE r;`); 
+          tx
+          .run(`CALL gds.graph.drop('myGraph') YIELD graphName;`);
+          tx
+          .run(`CALL gds.graph.drop('myEdgeGraph') YIELD graphName;`);
+          tx
+          .run(`CALL gds.graph.drop('myHyperGraph') YIELD graphName;`);
+        tx.commit();
+    
+    }
+
+
+}
 mongoose
   .connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true ,useFindAndModify: false})
   .then(() => {
     console.log('dev mode plz uncomment this section')
+    rebuildcommunities();
     // fetchNews(mecaurls,MecaCollection,mecaImg);
     // fetchNews(infourls,InfoCollection,infoImg);
     // fetchNews(elctrourls,ElectroCollection,electroImg);

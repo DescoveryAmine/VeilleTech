@@ -12,7 +12,6 @@ const Contact = lazy(() => import('../pages/Contact.page'));
 const Current = lazy(() => import('../pages/Current.page'));
 const Humains = lazy(() => import('../pages/Humains.page'));
 const Materials = lazy(() => import('../pages/Materials.page'));
-const Logout = lazy(() => import('../pages/Logout.page'));
 const NotFound = lazy(() => import('../pages/Page404.page'));
 
 const AfterAuthroutes = [
@@ -118,14 +117,6 @@ const AfterAuthroutes = [
         path: '/user/current',
         exact: true,
         component: Current,
-        authentication: false,
-        theme: "theme-1"
-    },
-    {
-        name: 'Logout',
-        path: '/user/logout',
-        exact: true,
-        component: Logout,
         authentication: false,
         theme: "theme-1"
     },

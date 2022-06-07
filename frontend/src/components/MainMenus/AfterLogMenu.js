@@ -90,7 +90,7 @@ export const AfterLogmenus = (name,role) => {
           },
           {
               id: 16,
-              link: '/user/logout',
+              child: 'button',
               linkText: 'Logout'
           },
   
@@ -205,7 +205,7 @@ export const AfterLogmenus = (name,role) => {
           },
           {
               id: 19,
-              link: '/user/logout',
+              child:'button',
               linkText: 'Logout'
           },
   

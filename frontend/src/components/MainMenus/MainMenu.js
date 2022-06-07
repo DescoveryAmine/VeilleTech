@@ -1,10 +1,14 @@
 import { AuthContext } from '../../context/auth-context';
-import { useState} from 'react';
+import { useState, useContext} from 'react';
 import { NavLink } from 'react-router-dom';
+import "antd/dist/antd.css";
+import { Button } from 'antd';
 import PostLogmenus from './PostLogMenu';
 const afterLogmenus = require ('./AfterLogMenu');
 
 const MainMenu = props => {
+
+    const auth = useContext(AuthContext);
     
     const{Name, Role} = props;
     let menu;
@@ -49,11 +53,15 @@ const MainMenu = props => {
                         <ul className={`dropdown-menu ${showMobileSubmenu === item?.id ? 'show' : ''}`} role="menu">
                             {item.submenu.map((sub_item, i) => (
                                 <li key={i}>
-                                    {sub_item.child ?
-                                        <NavLink onClick={e => e.preventDefault()}
-                                            to="/">{sub_item.linkText}</NavLink>
+                                    {sub_item.child==='button'?
+                                        <Button 
+                                        onClick={(event)=>{event.preventDefault();auth.logout();}}>
+                                        {sub_item.linkText}
+                                        </Button>
                                         : <NavLink
-                                            to={sub_item.link} className="dropdown-item" >{sub_item.linkText}</NavLink>}
+                                            to={sub_item.link} className="dropdown-item" >
+                                            {sub_item.linkText}
+                                            </NavLink>}
 
                                 </li>
                             ))}

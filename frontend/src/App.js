@@ -14,8 +14,9 @@ import ThemeRoute from "./routes/ThemeRoute/ThemeRoute";
 
 function App() {
 
-  const { token,tokenExpirationDate, login, logout, userId, userName, userRole } = useAuth();
+  const { token,tokenExpirationDate, login, logout, userId, userName, userRole, Fint } = useAuth();
   const [sToken, setToken] = useState(null);
+
 
   useEffect(()=>{
       const storedData = window.localStorage.getItem('userData');
@@ -28,7 +29,8 @@ function App() {
           }
         else
           {
-          localStorage.removeItem('userData');
+            
+            logout();
           }
 
       }
@@ -92,6 +94,7 @@ function App() {
       userName : userName,
       userRole : userRole,
       token: token,
+      Fint:Fint,
       tokenExpirationDate:tokenExpirationDate,
       login: login,
       logout: logout
